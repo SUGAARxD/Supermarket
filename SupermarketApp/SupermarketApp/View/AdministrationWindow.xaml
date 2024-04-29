@@ -1,0 +1,42 @@
+﻿<Window x:Class="SupermarketApp.View.AdministrationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SupermarketApp.View"
+        xmlns:vm="clr-namespace:SupermarketApp.ViewModel"
+        mc:Ignorable="d"
+        Title="Administration" 
+        Width="1280" Height="720"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        Background="{Binding MyTheme.WindowBackgroundColor}">
+
+    <Window.DataContext>
+        <vm:AdministrationVM/>
+    </Window.DataContext>
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2.5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Button
+            Grid.Column="1"
+            Content="Back"
+            Width="50"
+            Height="30"
+            FontSize="20"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Command="{Binding GoBackCommand}"
+            Background="{Binding MyTheme.ButtonBackgroundColor}"
+            BorderBrush="{Binding MyTheme.BorderColor}"/>
+
+        
+
+    </Grid>
+
+</Window>

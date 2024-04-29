@@ -1,0 +1,80 @@
+﻿<Window x:Class="SupermarketApp.View.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SupermarketApp.View"
+        xmlns:vm="clr-namespace:SupermarketApp.ViewModel"
+        mc:Ignorable="d"
+        Title="LoginWindow" 
+        Width="1280" Height="720"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        Background="{Binding MyTheme.WindowBackgroundColor}">
+
+    <Window.DataContext>
+        <vm:LoginVM/>
+    </Window.DataContext>
+
+    <Grid>
+
+        <StackPanel 
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+
+            <Label
+                Content="Username"
+                HorizontalAlignment="Center" 
+                Margin="0,0,0,10"
+                FontSize="20"
+                />
+
+            <TextBox
+                Width="200" Height="30"
+                Margin="0,0,0,10" 
+                FontSize="20"
+                BorderBrush="{Binding MyTheme.BorderColor}"
+                Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                />
+
+            <Label 
+                Content="Password" 
+                HorizontalAlignment="Center" 
+                Margin="10,0,0,10" 
+                FontSize="20"
+                />
+
+            <TextBox
+                Width="200" Height="30"
+                Margin="0,0,0,10" 
+                FontSize="20"
+                BorderBrush="{Binding MyTheme.BorderColor}"
+                Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
+                />
+
+            <Label 
+                Content="User Type" 
+                HorizontalAlignment="Center" 
+                Margin="0,0,0,10" 
+                FontSize="20"
+                />
+
+            <ComboBox
+                Margin="0,0,0,30"
+                FontSize="20"
+                ItemsSource="{Binding UserTypes}"
+                SelectedItem="{Binding UserType}"
+                />
+
+            <Button 
+                Content="Login" 
+                Width="200" Height="40" 
+                Margin="0,0,0,10" FontSize="20"
+                Background="{Binding MyTheme.ButtonBackgroundColor}" 
+                BorderBrush="{Binding MyTheme.BorderColor}"
+                Command="{Binding Path=LoginCommand}"
+                />
+
+        </StackPanel>
+    </Grid>
+</Window>
