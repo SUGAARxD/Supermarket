@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Data;
 using SupermarketApp.Model.EntityLayer;
 

@@ -1,14 +1,55 @@
-﻿namespace SupermarketApp.Model.EntityLayer
+﻿using SupermarketApp.ViewModel;
+
+namespace SupermarketApp.Model.EntityLayer
 {
-    internal class User
+    internal class User : BaseNotify
     {
 
         #region Properties and members
 
-        public int Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string UserType { get; set; }
+        private int _id;
+        public int Id
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                NotifyPropertyChanged(nameof(Id));
+            }
+        }
+
+        private string _username;
+        public string Username
+        {
+            get => _username;
+            set
+            {
+                _username = value;
+                NotifyPropertyChanged(nameof(Username));
+            }
+        }
+
+        private string _password;
+        public string Password
+        {
+            get => _password;
+            set
+            {
+                _password = value;
+                NotifyPropertyChanged(nameof(Password));
+            }
+        }
+
+        private string _userType;
+        public string UserType
+        {
+            get => _userType;
+            set
+            {
+                _userType = value;
+                NotifyPropertyChanged(nameof(UserType));
+            }
+        }
 
         #endregion
 

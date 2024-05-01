@@ -62,6 +62,12 @@
     <Compile Include="Model\BusinessLogicLayer\UsersBLL.cs" />
     <Compile Include="Model\DataAccessLayer\DALHelper.cs" />
     <Compile Include="Model\DataAccessLayer\UsersDAL.cs" />
+    <Compile Include="Model\EntityLayer\Category.cs" />
+    <Compile Include="Model\EntityLayer\Producer.cs" />
+    <Compile Include="Model\EntityLayer\Product.cs" />
+    <Compile Include="Model\EntityLayer\Receipt.cs" />
+    <Compile Include="Model\EntityLayer\Stock.cs" />
+    <Compile Include="Model\EntityLayer\StockReceipt.cs" />
     <Compile Include="Model\Theme.cs" />
     <Compile Include="Utilities\FileHelper.cs" />
     <Compile Include="ViewModel\AdministrationVM.cs" />
@@ -75,12 +81,30 @@
     <Compile Include="View\CashierWindow.xaml.cs">
       <DependentUpon>CashierWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CategoriesManagerWindow.xaml.cs">
+      <DependentUpon>CategoriesManagerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\ProducersManagerWindow.xaml.cs">
+      <DependentUpon>ProducersManagerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProductsManagerWindow.xaml.cs">
+      <DependentUpon>ProductsManagerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReceiptsManagerWindow.xaml.cs">
+      <DependentUpon>ReceiptsManagerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StocksManagerWindow.xaml.cs">
+      <DependentUpon>StocksManagerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UsersManagerWindow.xaml.cs">
+      <DependentUpon>UsersManagerWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="View\AdministrationWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -90,9 +114,33 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\CategoriesManagerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ProducersManagerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ProductsManagerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReceiptsManagerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StocksManagerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UsersManagerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

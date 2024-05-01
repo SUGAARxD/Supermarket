@@ -119,7 +119,7 @@ namespace SupermarketApp.ViewModel
                 Application.Current.Windows.OfType<LoginWindow>().FirstOrDefault().Close();
                 return;
             }
-            MessageBox.Show("Invalid username or password.");
+            MessageBox.Show("User does not exist!");
         }
         private bool CanLogin(object parameter)
         {

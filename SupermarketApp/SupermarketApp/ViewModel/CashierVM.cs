@@ -1,5 +1,7 @@
 ﻿using SupermarketApp.Model;
+using SupermarketApp.Model.EntityLayer;
 using SupermarketApp.View;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -19,6 +21,19 @@ namespace SupermarketApp.ViewModel
         }
 
         #region Properties and members
+
+        public ObservableCollection<StockReceipt> ProductsList;
+
+        private Receipt _receipt;
+        public Receipt Receipt
+        {
+            get => _receipt;
+            set
+            {
+                _receipt = value;
+                NotifyPropertyChanged(nameof(Receipt));
+            }
+        }
 
         private Theme _myTheme;
         public Theme MyTheme

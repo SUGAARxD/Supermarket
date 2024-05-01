@@ -18,16 +18,85 @@
 
     <Grid>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.7*"/>
+        </Grid.ColumnDefinitions>
+
         <Button
+            Grid.Column="1"
             Content="Back"
             Width="50"
             Height="30"
             FontSize="20"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            Command="{Binding GoBackCommand}"
             Background="{Binding MyTheme.ButtonBackgroundColor}"
-            BorderBrush="{Binding MyTheme.BorderColor}"/>
+            BorderBrush="{Binding MyTheme.BorderColor}"
+            Command="{Binding GoBackCommand}"
+            />
+
+        <StackPanel
+            Grid.Column="0"
+            Margin="0,20,0,0">
+            
+        
+        <DataGrid
+            AutoGenerateColumns="False"
+            Height="600"
+            FontSize="20"
+            ItemsSource="{Binding ProductsList}" 
+            IsReadOnly="True"
+            CanUserReorderColumns="False"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            CanUserSortColumns="False"
+            CanUserResizeColumns="False"
+            CanUserResizeRows="False"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            BorderBrush="{Binding MyTheme.BorderColor}">
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                    Header="Product" 
+                    Width="*"
+                    Binding="{Binding Stock.Product.Name}"
+                    />
+                <DataGridTextColumn 
+                    Header="Price" 
+                    Width="*"
+                    Binding="{Binding Stock.SalePrice}"
+                    />
+                <DataGridTextColumn 
+                    Header="Quantity" 
+                    Width="*"
+                    Binding="{Binding Quantity}"
+                    />
+                <DataGridTextColumn 
+                    Header="Subtotal" 
+                    Width="*"
+                    Binding="{Binding Subtotal}"
+                    />
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+            <StackPanel
+                Orientation="Horizontal">
+                <Label
+                    Content="Total:"
+                    FontSize="35"
+                    Width="auto"/>
+
+                <Label
+                    Content="{Binding Receipt.Total}"
+                    FontSize="35"
+                    Width="auto"
+                    HorizontalContentAlignment="Center"
+                    />
+
+            </StackPanel>
+            
+        </StackPanel>
 
     </Grid>
     
