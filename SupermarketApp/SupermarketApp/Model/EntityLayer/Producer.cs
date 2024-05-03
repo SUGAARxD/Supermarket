@@ -29,14 +29,14 @@ namespace SupermarketApp.Model.EntityLayer
             }
         }
 
-        private string _city;
-        public string City
+        private string _country;
+        public string Country
         {
-            get => _city;
+            get => _country;
             set
             {
-                _city = value;
-                NotifyPropertyChanged(nameof(City));
+                _country = value;
+                NotifyPropertyChanged(nameof(Country));
             }
         }
 

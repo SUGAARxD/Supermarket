@@ -59,8 +59,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\DateToStringConverter.cs" />
+    <Compile Include="Model\BusinessLogicLayer\CategoriesBLL.cs" />
+    <Compile Include="Model\BusinessLogicLayer\ProducersBLL.cs" />
+    <Compile Include="Model\BusinessLogicLayer\ProductsBLL.cs" />
+    <Compile Include="Model\BusinessLogicLayer\StocksBLL.cs" />
     <Compile Include="Model\BusinessLogicLayer\UsersBLL.cs" />
+    <Compile Include="Model\CashierSearchStockModel.cs" />
+    <Compile Include="Model\DataAccessLayer\CategoriesDAL.cs" />
     <Compile Include="Model\DataAccessLayer\DALHelper.cs" />
+    <Compile Include="Model\DataAccessLayer\ProducersDAL.cs" />
+    <Compile Include="Model\DataAccessLayer\ProductsDAL.cs" />
+    <Compile Include="Model\DataAccessLayer\StocksDAL.cs" />
     <Compile Include="Model\DataAccessLayer\UsersDAL.cs" />
     <Compile Include="Model\EntityLayer\Category.cs" />
     <Compile Include="Model\EntityLayer\Producer.cs" />
