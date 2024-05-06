@@ -117,19 +117,7 @@ namespace SupermarketApp.ViewModel
             LoginWindow loginWindow = new LoginWindow(_myTheme);
             loginWindow.Show();
 
-            if (Receipt != null)
-            {
-                _receiptsBLL.DropReceipt(Receipt);
-                foreach (var item in ProductsList)
-                {
-                    if (item.Stock.Quantity == 0)
-                        _stocksBLL.ActivateStock(item.Stock);
-                    _stocksBLL.UpdateStockQuantity(item.Stock, item.Stock.Quantity + item.Quantity);
-                }
-            }
-
             Application.Current.Windows.OfType<CashierWindow>().FirstOrDefault().Close();
-
         }
 
         private ICommand _searchStockCommand;
@@ -342,7 +330,7 @@ namespace SupermarketApp.ViewModel
 
                 if (quantity <= 0)
                 {
-                    MessageBox.Show("Please add a positive quantity when adding a new product to the receipt!");
+                    MessageBox.Show("Please add a valid quantity( > 0 ) when adding a new product to the receipt!");
                     return;
                 }
 
@@ -400,7 +388,19 @@ namespace SupermarketApp.ViewModel
                 }
             }
         }
-
+        public void OnWindowClosing()
+        {
+            if (Receipt != null)
+            {
+                _receiptsBLL.DropReceipt(Receipt);
+                foreach (var item in ProductsList)
+                {
+                    if (item.Stock.Quantity == 0)
+                        _stocksBLL.ActivateStock(item.Stock);
+                    _stocksBLL.UpdateStockQuantity(item.Stock, item.Stock.Quantity + item.Quantity);
+                }
+            }
+        }
 
         #endregion
 

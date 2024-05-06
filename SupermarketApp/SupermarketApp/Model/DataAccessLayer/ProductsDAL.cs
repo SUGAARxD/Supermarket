@@ -3,8 +3,6 @@ using System.Data.SqlClient;
 using System.Data;
 using SupermarketApp.Model.BusinessLogicLayer;
 using System.Collections.ObjectModel;
-using System.Runtime.Remoting.Messaging;
-using System.Data.Common;
 
 namespace SupermarketApp.Model.DataAccessLayer
 {
@@ -46,10 +44,10 @@ namespace SupermarketApp.Model.DataAccessLayer
         }
         public ObservableCollection<string> GetAllProductsName()
         {
-            ObservableCollection<string> productsName = new ObservableCollection<string>();
-
             using (SqlConnection connection = DALHelper.Connection)
             {
+                ObservableCollection<string> productsName = new ObservableCollection<string>();
+
                 SqlCommand command = new SqlCommand("GetAllProductsName", connection);
                 command.CommandType = CommandType.StoredProcedure;
 
@@ -60,17 +58,17 @@ namespace SupermarketApp.Model.DataAccessLayer
                 {
                     productsName.Add(reader[0].ToString());
                 }
-            }
 
-            return productsName;
+                return productsName;
+            }
         }
 
         public ObservableCollection<string> GetAllProductsBarcode()
         {
-            ObservableCollection<string> productsBarcode = new ObservableCollection<string>();
-
             using (SqlConnection connection = DALHelper.Connection)
             {
+                ObservableCollection<string> productsBarcode = new ObservableCollection<string>();
+
                 SqlCommand command = new SqlCommand("GetAllProductsBarcode", connection);
                 command.CommandType = CommandType.StoredProcedure;
 
@@ -81,9 +79,69 @@ namespace SupermarketApp.Model.DataAccessLayer
                 {
                     productsBarcode.Add(reader[0].ToString());
                 }
-            }
 
-            return productsBarcode;
+                return productsBarcode;
+            }
+        }
+
+        public void GetAllActiveProducts(ObservableCollection<Product> Products)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("GetAllActiveProducts", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                connection.Open();
+                
+                CategoriesBLL categoryBLL = new CategoriesBLL();
+                ProducersBLL producersBLL = new ProducersBLL();
+                
+                Products.Clear();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Product product = new Product();
+                    product.Id = (int)(reader[0]);
+                    product.Name = reader[1].ToString();
+                    product.Barcode = reader[2].ToString();
+
+                    product.Category = categoryBLL.GetCategory((int)(reader[3]));
+                    product.Producer = producersBLL.GetProducer((int)(reader[4]));
+
+                    Products.Add(product);
+                }
+            }
+        }
+
+        public void GetAllInactiveProducts(ObservableCollection<Product> Products)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("GetAllInactiveProducts", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                connection.Open();
+
+                CategoriesBLL categoryBLL = new CategoriesBLL();
+                ProducersBLL producersBLL = new ProducersBLL();
+
+                Products.Clear();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Product product = new Product();
+                    product.Id = (int)(reader[0]);
+                    product.Name = reader[1].ToString();
+                    product.Barcode = reader[2].ToString();
+
+                    product.Category = categoryBLL.GetCategory((int)(reader[3]));
+                    product.Producer = producersBLL.GetProducer((int)(reader[4]));
+
+                    Products.Add(product);
+                }
+            }
         }
 
         #endregion

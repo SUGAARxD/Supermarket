@@ -15,5 +15,6 @@ namespace SupermarketApp.View
             InitializeComponent();
             this.DataContext = new AdministrationVM(myTheme, user);
         }
+
     }
 }

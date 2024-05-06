@@ -8,7 +8,6 @@ namespace SupermarketApp.Model.BusinessLogicLayer
     {
         public ProductsBLL()
         {
-
         }
 
         #region Properties and members
@@ -32,6 +31,20 @@ namespace SupermarketApp.Model.BusinessLogicLayer
         public ObservableCollection<string> GetAllProductsBarcode()
         {
             return productsDAL.GetAllProductsBarcode();
+        }
+
+        public void GetAllActiveProducts(ObservableCollection<Product> Products)
+        {
+            productsDAL.GetAllActiveProducts(Products);
+            if (Products.Count == 0)
+                throw new System.Exception("No active products found!");
+        }
+
+        public void GetAllInactiveProducts(ObservableCollection<Product> Products)
+        {
+            productsDAL.GetAllActiveProducts(Products);
+            if (Products.Count == 0)
+                throw new System.Exception("No inactive products found!");
         }
 
         #endregion

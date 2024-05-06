@@ -1,6 +1,7 @@
 ﻿using SupermarketApp.Model;
 using SupermarketApp.Model.EntityLayer;
 using SupermarketApp.ViewModel;
+using System.ComponentModel;
 using System.Windows;
 
 namespace SupermarketApp.View
@@ -15,5 +16,14 @@ namespace SupermarketApp.View
             InitializeComponent();
             this.DataContext = new CashierVM(myTheme, cashier);
         }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if (this.DataContext is CashierVM viewModel)
+            {
+                viewModel.OnWindowClosing();
+            }
+        }
+
     }
 }

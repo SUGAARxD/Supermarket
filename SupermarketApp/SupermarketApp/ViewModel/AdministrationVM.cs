@@ -45,8 +45,6 @@ namespace SupermarketApp.ViewModel
             }
         }
 
-
-
         #endregion
 
         #region Commands
@@ -68,6 +66,105 @@ namespace SupermarketApp.ViewModel
 
             Application.Current.Windows.OfType<AdministrationWindow>().FirstOrDefault().Close();
 
+        }
+
+        private ICommand _openProductsManagerWindowCommand;
+        public ICommand OpenProductsManagerWindowCommand
+        {
+            get
+            {
+                if (_openProductsManagerWindowCommand == null)
+                    _openProductsManagerWindowCommand = new RelayCommand(OpenProductsManagerWindow);
+                return _openProductsManagerWindowCommand;
+            }
+        }
+        private void OpenProductsManagerWindow(object parameter)
+        {
+            ProductsManagerWindow productsManagerWindow = new ProductsManagerWindow(_myTheme);
+
+            Application.Current.Windows.OfType<AdministrationWindow>().FirstOrDefault().Hide();
+            
+            productsManagerWindow.ShowDialog();
+        }
+
+        private ICommand _openProducersManagerWindowCommand;
+        public ICommand OpenProducersManagerWindowCommand
+        {
+            get
+            {
+                if (_openProducersManagerWindowCommand == null)
+                    _openProducersManagerWindowCommand = new RelayCommand(OpenProducersManagerWindow);
+                return _openProducersManagerWindowCommand;
+            }
+        }
+        private void OpenProducersManagerWindow(object parameter)
+        {
+            ProducersManagerWindow producersManagerWindow = new ProducersManagerWindow(_myTheme);
+            producersManagerWindow.ShowDialog();
+        }
+
+        private ICommand _openCategoriesManagerWindowCommand;
+        public ICommand OpenCategoriesManagerWindowCommand
+        {
+            get
+            {
+                if (_openCategoriesManagerWindowCommand == null)
+                    _openCategoriesManagerWindowCommand = new RelayCommand(OpenCategoriesManagerWindow);
+                return _openCategoriesManagerWindowCommand;
+            }
+        }
+        private void OpenCategoriesManagerWindow(object parameter)
+        {
+            CategoriesManagerWindow categoriesManagerWindow = new CategoriesManagerWindow(_myTheme);
+            categoriesManagerWindow.ShowDialog();
+        }
+
+        private ICommand _openStocksManagerWindowCommand;
+        public ICommand OpenStocksManagerWindowCommand
+        {
+            get
+            {
+                if (_openStocksManagerWindowCommand == null)
+                    _openStocksManagerWindowCommand = new RelayCommand(OpenStocksManagerWindow);
+                return _openStocksManagerWindowCommand;
+            }
+        }
+        private void OpenStocksManagerWindow(object parameter)
+        {
+            StocksManagerWindow stocksManagerWindow = new StocksManagerWindow(_myTheme);
+            stocksManagerWindow.ShowDialog();
+        }
+
+        private ICommand _openReceiptsManagerWindowCommand;
+        public ICommand OpenReceiptsManagerWindowCommand
+        {
+            get
+            {
+                if (_openReceiptsManagerWindowCommand == null)
+                    _openReceiptsManagerWindowCommand = new RelayCommand(OpenReceiptsManagerWindow);
+                return _openReceiptsManagerWindowCommand;
+            }
+        }
+        private void OpenReceiptsManagerWindow(object parameter)
+        {
+            ReceiptsManagerWindow receiptsManagerWindow = new ReceiptsManagerWindow(_myTheme);
+            receiptsManagerWindow.ShowDialog();
+        }
+
+        private ICommand _openUsersManagerWindowCommand;
+        public ICommand OpenUsersManagerWindowCommand
+        {
+            get
+            {
+                if (_openUsersManagerWindowCommand == null)
+                    _openUsersManagerWindowCommand = new RelayCommand(OpenUsersManagerWindow);
+                return _openUsersManagerWindowCommand;
+            }
+        }
+        private void OpenUsersManagerWindow(object parameter)
+        {
+            UsersManagerWindow usersManagerWindow = new UsersManagerWindow(_myTheme);
+            usersManagerWindow.ShowDialog();
         }
 
         #endregion

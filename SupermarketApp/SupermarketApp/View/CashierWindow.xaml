@@ -11,7 +11,8 @@
         Width="1280" Height="720"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
-        Background="{Binding MyTheme.WindowBackgroundColor}">
+        Background="{Binding MyTheme.WindowBackgroundColor}"
+        Closing="Window_Closing">
 
     <Window.DataContext>
         <vm:CashierVM/>
@@ -58,8 +59,7 @@
                 CanUserResizeRows="False"
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
                 BorderBrush="{Binding MyTheme.BorderColor}"
-                SelectedItem="{Binding SelectedProduct}"
-                    >
+                SelectedItem="{Binding SelectedProduct}">
 
                 <DataGrid.Columns>
                     <DataGridTextColumn 

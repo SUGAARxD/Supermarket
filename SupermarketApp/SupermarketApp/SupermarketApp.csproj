@@ -86,9 +86,15 @@
     <Compile Include="ViewModel\AdministrationVM.cs" />
     <Compile Include="ViewModel\BaseNotify.cs" />
     <Compile Include="ViewModel\CashierVM.cs" />
+    <Compile Include="ViewModel\CategoriesManagerVM.cs" />
     <Compile Include="ViewModel\DialogBoxVM.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
+    <Compile Include="ViewModel\ProducersManagerVM.cs" />
+    <Compile Include="ViewModel\ProductsManagerVM.cs" />
+    <Compile Include="ViewModel\ReceiptsManagerVM.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\StocksManagerVM.cs" />
+    <Compile Include="ViewModel\UsersManagerVM.cs" />
     <Compile Include="View\AdministrationWindow.xaml.cs">
       <DependentUpon>AdministrationWindow.xaml</DependentUpon>
     </Compile>

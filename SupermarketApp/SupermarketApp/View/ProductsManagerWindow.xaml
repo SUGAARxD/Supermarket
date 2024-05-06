@@ -4,9 +4,102 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupermarketApp.View"
+        xmlns:vm="clr-namespace:SupermarketApp.ViewModel"
         mc:Ignorable="d"
-        Title="ProductsManagerWindow" Height="450" Width="800">
+        Title="Products Manager" 
+        Width="1024" Height="576"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        Background="{Binding MyTheme.WindowBackgroundColor}"
+        Closing="Window_Closing">
+
+    <Window.DataContext>
+        <vm:ProductsManagerVM/>
+    </Window.DataContext>
+
     <Grid>
         
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        
+        <DataGrid
+            Grid.Column="0"
+            HorizontalAlignment="Right"
+            AutoGenerateColumns="False"
+            Width="600"
+            Height="500"
+            FontSize="20"
+            ItemsSource="{Binding Products}" 
+            IsReadOnly="False"
+            CanUserSortColumns="True"
+            CanUserReorderColumns="False"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            CanUserResizeColumns="False"
+            CanUserResizeRows="False"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            BorderBrush="{Binding MyTheme.BorderColor}"
+            SelectedItem="{Binding SelectedProduct}">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                    Header="Name" 
+                    Width="*"
+                    Binding="{Binding Name}"
+                        />
+                <DataGridTextColumn 
+                    Header="Barcode" 
+                    Width="*"
+                    Binding="{Binding Barcode}"
+                        />
+                <DataGridTextColumn 
+                    Header="Category" 
+                    Width="*"
+                    Binding="{Binding Category.Name}"
+                        />
+                <DataGridTextColumn 
+                    Header="Producer" 
+                    Width="*"
+                    Binding="{Binding Producer.Name}"
+                        />
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel
+            Grid.Column="1"
+            Height="200">
+
+            <StackPanel
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                Height="35">
+
+                <Button
+                    Content="Active Products"
+                    Width="170"
+                    FontSize="20"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding GetActiveProductsCommand}"
+                        />
+
+                <Button
+                    Content="Inactive Products"
+                    Width="170"
+                    FontSize="20"
+                    Margin="30,0,0,0"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding GetInactiveProductsCommand}"
+                        />
+
+            </StackPanel>
+
+        </StackPanel>
+
     </Grid>
 </Window>
