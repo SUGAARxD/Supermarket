@@ -1,6 +1,8 @@
 ﻿using SupermarketApp.Model.DataAccessLayer;
 using SupermarketApp.Model.EntityLayer;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace SupermarketApp.Model.BusinessLogicLayer
 {
@@ -34,6 +36,24 @@ namespace SupermarketApp.Model.BusinessLogicLayer
             return Stocks[0];
         }
 
+        public void DeleteStock(Stock stock)
+        {
+            stocksDAL.DeleteStock(stock.Id);
+        }
+
+        public void ActivateStock(Stock stock)
+        {
+            stocksDAL.ActivateStock(stock.Id);
+        }
+
+        public void UpdateStockQuantity(Stock stock, int newQuantity)
+        {
+            stocksDAL.UpdateStockQuantity(stock, newQuantity);
+            if (newQuantity == 0)
+                DeleteStock(stock);
+        }
+
         #endregion
+
     }
 }

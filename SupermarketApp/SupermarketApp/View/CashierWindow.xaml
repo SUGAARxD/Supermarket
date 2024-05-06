@@ -26,240 +26,541 @@
 
 
         <StackPanel
-            Grid.Column="0"
-            Margin="0,20,0,0">
+            Grid.Column="0">
 
+            <StackPanel
+                Orientation="Horizontal"
+                Margin="170,0,0,0">
+
+                <Label 
+                     Content="Receipt No."
+                     FontSize="20"
+                         />
+
+                <Label 
+                     Content="{Binding ReceiptNumber}"
+                     FontSize="20"
+                         />
+
+            </StackPanel>
 
             <DataGrid
-            AutoGenerateColumns="False"
-            Height="600"
-            FontSize="20"
-            ItemsSource="{Binding ProductsList}" 
-            IsReadOnly="True"
-            CanUserReorderColumns="False"
-            CanUserAddRows="False"
-            CanUserDeleteRows="False"
-            CanUserSortColumns="False"
-            CanUserResizeColumns="False"
-            CanUserResizeRows="False"
-            ScrollViewer.VerticalScrollBarVisibility="Auto"
-            BorderBrush="{Binding MyTheme.BorderColor}">
+                AutoGenerateColumns="False"
+                Height="580"
+                FontSize="20"
+                ItemsSource="{Binding ProductsList}" 
+                IsReadOnly="True"
+                CanUserReorderColumns="False"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                CanUserSortColumns="False"
+                CanUserResizeColumns="False"
+                CanUserResizeRows="False"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                BorderBrush="{Binding MyTheme.BorderColor}"
+                SelectedItem="{Binding SelectedProduct}"
+                    >
 
                 <DataGrid.Columns>
                     <DataGridTextColumn 
-                    Header="Product" 
-                    Width="*"
-                    Binding="{Binding Stock.Product.Name}"
-                    />
+                        Header="Product" 
+                        Width="*"
+                        Binding="{Binding Stock.Product.Name}"
+                            />
                     <DataGridTextColumn 
-                    Header="Price" 
-                    Width="*"
-                    Binding="{Binding Stock.SalePrice}"
-                    />
+                        Header="Price" 
+                        Width="*"
+                        Binding="{Binding Stock.SalePrice}"
+                            />
                     <DataGridTextColumn 
-                    Header="Quantity" 
-                    Width="*"
-                    Binding="{Binding Quantity}"
-                    />
+                        Header="Quantity" 
+                        Width="*"
+                        Binding="{Binding Quantity}"
+                            />
                     <DataGridTextColumn 
-                    Header="Subtotal" 
-                    Width="*"
-                    Binding="{Binding Subtotal}"
-                    />
+                        Header="Subtotal" 
+                        Width="*"
+                        Binding="{Binding Subtotal}"
+                            />
 
                 </DataGrid.Columns>
             </DataGrid>
 
             <StackPanel
                 Orientation="Horizontal">
+                
                 <Label
                     Content="Total:"
                     FontSize="35"
-                    Width="auto"/>
+                    Width="auto"
+                        />
 
                 <Label
                     Content="{Binding Receipt.Total}"
                     FontSize="35"
                     Width="auto"
                     HorizontalContentAlignment="Center"
-                    />
+                        />
 
             </StackPanel>
 
         </StackPanel>
 
-        
-        <Grid
-            Grid.Column="1">
+        <StackPanel
+            Grid.Column="1"
+            Height="550">
 
+            <StackPanel
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                Margin="0,0,0,50"
+                Height="35">
 
-            <StackPanel>
-                
-                <StackPanel
-                Width="500"
-                Height="160">
-
-
-                <StackPanel
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    Width="500">
-
-                    <StackPanel
-                        Width="150"
-                        Height="65">
-
-                        <Label 
-                            Content="Product Name"
-                            Height="35"
-                            FontSize="15"
-                            BorderThickness="0,0,0,1"
-                            BorderBrush="{Binding MyTheme.BorderColor}"
-                            />
-
-                        <TextBox
-                            Height="30"
-                            FontSize="20"
-                            BorderBrush="{Binding MyTheme.BorderColor}"
-                            Text="{Binding CashierSearchStock.ProductName}"
+                <Button
+                    Content="New Receipt"
+                    Width="150"
+                    FontSize="20"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding NewReceiptCommand}"
                         />
 
-                    </StackPanel>
+                <Button
+                    Content="Drop Receipt"
+                    Width="150"
+                    FontSize="20"
+                    Margin="50,0,50,0"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding DropReceiptCommand}"
+                        />
+
+                <Button
+                    Content="Emit Receipt"
+                    Width="150"
+                    FontSize="20"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding EmitReceiptCommand}"
+                        />
+
+            </StackPanel>
+
+            <StackPanel
+                Height="350">
+
+                <StackPanel.Resources>
+                    <convert:StockModelToCollectionConverter x:Key="StockModelToCollectionConverter" />
+                </StackPanel.Resources>
+
+                <StackPanel
+                    Width="500"
+                    Height="160">
+
 
                     <StackPanel
-                        Width="150"
-                        Height="65"
-                        Margin="10,0,10,0">
-
-                        <Label 
-                            Content="Product Barcode"
-                            Height="35"
-                            FontSize="15"
-                            BorderThickness="0,0,0,1"
-                            BorderBrush="{Binding MyTheme.BorderColor}"
-                            />
-
-                        <TextBox
-                            Height="30"
-                            FontSize="20"
-                            BorderBrush="{Binding MyTheme.BorderColor}"
-                            Text="{Binding CashierSearchStock.ProductBarcode}"
-                            />
-
-                    </StackPanel>
-
-                    <StackPanel
-                        Width="180"
-                        Height="70">
-
-                        <Label 
-                            Content="Expiration Date"
-                            Height="35"
-                            FontSize="15"
-                            BorderThickness="0,0,0,1"
-                            BorderBrush="{Binding MyTheme.BorderColor}"
-                            />
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Width="500">
 
                         <StackPanel
-                            Orientation="Horizontal">
+                            Width="150"
+                            Height="65">
 
-                            <StackPanel.Resources>
-                                <convert:DateToStringConverter x:Key="DateToStringConverter" />
+                            <Label 
+                                Content="Product Name"
+                                Height="35"
+                                FontSize="15"
+                                BorderThickness="0,0,0,1"
+                                BorderBrush="{Binding MyTheme.BorderColor}"
+                                    />
 
-                                <Style TargetType="DatePickerTextBox">
-                                    <Setter Property="IsEnabled" Value="False" />
-                                </Style>
-                            </StackPanel.Resources>
-
-                            <DatePicker
-                                Width="150"
+                            <TextBox
+                                Height="30"
                                 FontSize="20"
                                 BorderBrush="{Binding MyTheme.BorderColor}"
-                                SelectedDate="{Binding CashierSearchStock.StockExpirationDate, Converter={StaticResource DateToStringConverter}}" />
+                                Text="{Binding CashierSearchStock.ProductName, UpdateSourceTrigger=PropertyChanged}"
+                                    />
+
+                        </StackPanel>
+
+                        <StackPanel
+                            Width="150"
+                            Height="65"
+                            Margin="10,0,10,0">
+
+                            <Label 
+                                Content="Product Barcode"
+                                Height="35"
+                                FontSize="15"
+                                BorderThickness="0,0,0,1"
+                                BorderBrush="{Binding MyTheme.BorderColor}"
+                                    />
+
+                            <TextBox
+                                Height="30"
+                                FontSize="20"
+                                BorderBrush="{Binding MyTheme.BorderColor}"
+                                Text="{Binding CashierSearchStock.ProductBarcode, UpdateSourceTrigger=PropertyChanged}"
+                                    />
+
+                        </StackPanel>
+
+                        <StackPanel
+                            Width="180"
+                            Height="70">
+
+                            <Label 
+                                Content="Expiration Date"
+                                Height="35"
+                                FontSize="15"
+                                BorderThickness="0,0,0,1"
+                                BorderBrush="{Binding MyTheme.BorderColor}"
+                                    />
+
+                            <StackPanel
+                                Orientation="Horizontal">
+
+                                <StackPanel.Resources>
+                                    <convert:StringToDateConverter x:Key="StringToDateConverter" />
+
+                                    <Style TargetType="DatePickerTextBox">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </Style>
+                                </StackPanel.Resources>
+
+                                <DatePicker
+                                    Width="150"
+                                    FontSize="20"
+                                    BorderBrush="{Binding MyTheme.BorderColor}"
+                                    SelectedDate="{Binding CashierSearchStock.StockExpirationDate, Converter={StaticResource StringToDateConverter}, Mode=TwoWay}" />
+
+                                <Button
+                                    Content="X"
+                                    Width="30"
+                                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                                    BorderBrush="{Binding MyTheme.BorderColor}"
+                                    Command="{Binding ClearDateCommand}"
+                                        />
+
+                                <Button/>
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <StackPanel
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Width="500"
+                        Margin="0,20,0,0">
+
+                        <StackPanel
+                            Width="150"
+                            Height="65"
+                            Margin="0,0,10,0">
+
+                            <Label 
+                                Content="Category Name"
+                                Height="35"
+                                FontSize="15"
+                                BorderThickness="0,0,0,1"
+                                BorderBrush="{Binding MyTheme.BorderColor}"
+                                    />
+
+                            <TextBox
+                                Height="30"
+                                FontSize="20"
+                                BorderBrush="{Binding MyTheme.BorderColor}"
+                                Text="{Binding CashierSearchStock.CategoryName, UpdateSourceTrigger=PropertyChanged}"
+                                    />
+
+                        </StackPanel>
+
+                        <StackPanel
+                            Width="150"
+                            Height="65">
+
+                            <Label 
+                                Content="Producer Name"
+                                Height="35"
+                                FontSize="15"
+                                BorderThickness="0,0,0,1"
+                                BorderBrush="{Binding MyTheme.BorderColor}"
+                                    />
+
+                            <TextBox
+                                Height="30"
+                                FontSize="20"
+                                BorderBrush="{Binding MyTheme.BorderColor}"
+                                Text="{Binding CashierSearchStock.ProducerName, UpdateSourceTrigger=PropertyChanged}"
+                                    />
+
+                        </StackPanel>
+
+                        <StackPanel
+                            Width="80"
+                            Height="65"
+                            Margin="20,0,0,0">
+
+                            <Label
+                                Height="35"
+                                FontSize="15"
+                                    />
 
                             <Button
-                                Content="X"
-                                Width="30"
+                                HorizontalAlignment="Left"
+                                Content="Search"
+                                Height="30"
+                                Width="80"
+                                FontSize="20"
                                 Background="{Binding MyTheme.ButtonBackgroundColor}"
                                 BorderBrush="{Binding MyTheme.BorderColor}"
-                                Command="{Binding _ClearDateCommand}"
+                                Command="{Binding SearchStockCommand}"
+                                    />
+
+                        </StackPanel>
+
+                        <StackPanel
+                            Width="80"
+                            Height="65"
+                            Margin="10,0,0,0">
+
+                            <Label
+                                Height="35"
+                                FontSize="15"
                                 />
 
-                            <Button/>
+                            <Button
+                                Content="Clear"
+                                Height="30"
+                                Width="80"
+                                FontSize="20"
+                                Background="{Binding MyTheme.ButtonBackgroundColor}"
+                                BorderBrush="{Binding MyTheme.BorderColor}"
+                                Command="{Binding ClearCommand}"
+                                />
 
                         </StackPanel>
 
                     </StackPanel>
 
                 </StackPanel>
-                
+
                 <StackPanel
                     Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    Width="500"
-                    Margin="0,20,0,0">
+                    Margin="10,40,0,10">
 
                     <StackPanel
-                        Width="150"
-                        Height="65"
-                        Margin="0,0,10,0">
+                        Width="100">
 
                         <Label 
-                            Content="Category Name"
-                            Height="35"
-                            FontSize="15"
-                            BorderThickness="0,0,0,1"
-                            BorderBrush="{Binding MyTheme.BorderColor}"
-                            />
-
-                        <TextBox
-                            Height="30"
+                            Content="Product"
                             FontSize="20"
+                            Background="white"
+                            BorderThickness="2,2,1,1"
                             BorderBrush="{Binding MyTheme.BorderColor}"
-                            Text="{Binding CashierSearchStock.CategoryName}"
-                            />
+                                />
 
-                    </StackPanel>
-
-                    <StackPanel
-                        Width="150"
-                        Height="65">
-
-                        <Label 
-                            Content="Producer Name"
-                            Height="35"
-                            FontSize="15"
-                            BorderThickness="0,0,0,1"
-                            BorderBrush="{Binding MyTheme.BorderColor}"
-                            />
-
-                        <TextBox
-                            Height="30"
-                            FontSize="20"
-                            BorderBrush="{Binding MyTheme.BorderColor}"
-                            Text="{Binding CashierSearchStock.ProducerName}"
-                            />
-
-                    </StackPanel>
-
-                    <StackPanel
-                        Width="150"
-                        Height="65">
-                        
                         <Label
-                            Height="35"
-                            FontSize="15"
-                            />
-
-                        <Button
-                            Content="Search"
-                            Height="30"
-                            Width="100"
+                            Height="95"
                             FontSize="20"
-                            Background="{Binding MyTheme.ButtonBackgroundColor}"
+                            Background="white"
+                            BorderThickness="2,1,1,2"
+                            BorderBrush="{Binding MyTheme.BorderColor}">
+
+                            <ScrollViewer
+                                CanContentScroll="True"
+                                VerticalScrollBarVisibility="Hidden"
+                                HorizontalScrollBarVisibility="Disabled" 
+                                Width="100">
+
+                                <TextBlock 
+                                    Text="{Binding SearchedStock.Product.Name}" 
+                                    TextWrapping="Wrap"
+                                        />
+                            </ScrollViewer>
+
+                        </Label>
+
+                    </StackPanel>
+
+                    <StackPanel
+                        Width="125">
+
+                        <Label
+                            Content="Barcode"
+                            FontSize="20"
+                            Background="white"
+                            BorderThickness="1,2,1,1"
                             BorderBrush="{Binding MyTheme.BorderColor}"
-                            Command="{Binding SearchStockCommand}"
-                            />
+                                />
+
+                        <Label
+                            Height="95"
+                            FontSize="20"
+                            Background="white"
+                            BorderThickness="1,1,1,2"
+                            BorderBrush="{Binding MyTheme.BorderColor}">
+
+                            <TextBlock 
+                                Text="{Binding SearchedStock.Product.Barcode}" 
+                                TextWrapping="Wrap"
+                                    />  
+
+                        </Label>
+
+                    </StackPanel>
+
+                    <StackPanel
+                        Width="100">
+
+                        <Label
+                            Content="Price"
+                            FontSize="20"
+                            Background="white"
+                            BorderThickness="1,2,1,1"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                                />
+
+                        <Label
+                            Height="95"
+                            FontSize="20"
+                            Background="white"
+                            BorderThickness="1,1,1,2"
+                            BorderBrush="{Binding MyTheme.BorderColor}">
+
+                            <TextBlock 
+                                Text="{Binding SearchedStock.SalePrice}" 
+                                TextWrapping="Wrap"
+                                    />
+
+                        </Label>
+
+                    </StackPanel>
+
+                    <StackPanel
+                        Width="100">
+
+                        <Label
+                            Content="Category"
+                            FontSize="20"
+                            Background="white"
+                            BorderThickness="1,2,1,1"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                                />
+
+                        <Label
+                            Height="95"
+                            FontSize="20"
+                            Background="white"
+                            BorderThickness="1,1,1,2"
+                            BorderBrush="{Binding MyTheme.BorderColor}">
+
+                            <ScrollViewer
+                                CanContentScroll="True"
+                                VerticalScrollBarVisibility="Hidden"
+                                HorizontalScrollBarVisibility="Disabled" 
+                                Width="100">
+
+                                <TextBlock 
+                                Text="{Binding SearchedStock.Product.Category.Name}" 
+                                TextWrapping="Wrap"
+                                     />
+                            
+                            </ScrollViewer>
+
+                        </Label>
+
+                    </StackPanel>
+
+                    <StackPanel
+                        Width="100">
+
+                        <Label
+                            Content="Producer"
+                            FontSize="20"
+                            Background="white"
+                            BorderThickness="1,2,1,1"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                                />
+
+                        <Label
+                            Height="95"
+                            FontSize="20"
+                            Background="white"
+                            BorderThickness="1,1,1,2"
+                            BorderBrush="{Binding MyTheme.BorderColor}">
+
+                            <ScrollViewer
+                                CanContentScroll="True"
+                                VerticalScrollBarVisibility="Hidden"
+                                HorizontalScrollBarVisibility="Disabled" Width="100">
+
+                                <TextBlock 
+                                    Text="{Binding SearchedStock.Product.Producer.Name}" 
+                                    TextWrapping="Wrap"
+                                        />
+
+                            </ScrollViewer>
+
+                        </Label>
+
+                    </StackPanel>
+
+                    <StackPanel
+                        Width="90">
+
+                        <Label
+                            Content="Quantity"
+                            FontSize="20"
+                            Background="white"
+                            BorderThickness="1,2,1,1"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                                />
+
+                        <Label
+                            Height="95"
+                            FontSize="20"
+                            Background="white"
+                            BorderThickness="1,1,1,2"
+                            BorderBrush="{Binding MyTheme.BorderColor}">
+
+                            <TextBlock 
+                                Text="{Binding SearchedStock.Quantity}" 
+                                TextWrapping="Wrap"
+                                    />
+
+                        </Label>
+
+                    </StackPanel>
+
+                    <StackPanel
+                        Width="150">
+
+                        <Label
+                            Content="Expiration Date"
+                            FontSize="20"
+                            Background="white"
+                            BorderThickness="1,2,2,1"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                                />
+
+                        <Label
+                            Height="95"
+                            FontSize="20"
+                            Background="white"
+                            BorderThickness="1,1,2,2"
+                            BorderBrush="{Binding MyTheme.BorderColor}">
+
+                            <TextBlock 
+                                Text="{Binding SearchedStock.ExpirationDate}" 
+                                TextWrapping="Wrap"
+                                    />
+
+                        </Label>
 
                     </StackPanel>
 
@@ -267,9 +568,97 @@
 
             </StackPanel>
 
+            <StackPanel
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                Margin="0,30,0,0"
+                Height="35">
+
+                <Button
+                    Content="Add Product"
+                    Width="200"
+                    FontSize="20"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding AddProductCommand}"
+                        />
+
+                <Button
+                    Content="Remove Product"
+                    Width="200"
+                    FontSize="20"
+                    Margin="100,0,0,0"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding RemoveProductCommand}"
+                        />
+
             </StackPanel>
 
-        </Grid>
+        </StackPanel>
+
+        <Canvas
+            Grid.Column="1"
+            Width="310"
+            Margin="0,150,190,0">
+
+            <ListBox
+                Margin="0,65,0,0"
+                Width="150"
+                Height="Auto"
+                MaxHeight="400"
+                FontSize="20"
+                HorizontalAlignment="Left"
+                BorderBrush="{Binding MyTheme.BorderColor}"
+                Background="White"
+                Visibility="{Binding CashierSearchStock.IsProductNameListBoxVisible}"
+                ItemsSource="{Binding CashierSearchStock.Suggestions}"
+                SelectedItem="{Binding CashierSearchStock.SelectedProductNameListBoxItem}"
+                    />
+
+            <ListBox
+                Margin="160,65,0,0"
+                Width="150"
+                Height="Auto"
+                MaxHeight="400"
+                FontSize="20"
+                HorizontalAlignment="Left"
+                BorderBrush="{Binding MyTheme.BorderColor}"
+                Background="White"
+                Visibility="{Binding CashierSearchStock.IsProductBarcodeListBoxVisible}"
+                ItemsSource="{Binding CashierSearchStock.Suggestions}"
+                SelectedItem="{Binding CashierSearchStock.SelectedProductBarcodeListBoxItem}"
+                    />
+
+            <ListBox
+                Margin="0,150,0,0"
+                Width="150"
+                Height="Auto"
+                MaxHeight="400"
+                FontSize="20"
+                HorizontalAlignment="Left"
+                BorderBrush="{Binding MyTheme.BorderColor}"
+                Background="White"
+                Visibility="{Binding CashierSearchStock.IsCategoryNameListBoxVisible}"
+                ItemsSource="{Binding CashierSearchStock.Suggestions}"
+                SelectedItem="{Binding CashierSearchStock.SelectedCategoryNameListBoxItem}"
+                    />
+
+            <ListBox
+                Margin="160,150,0,0"
+                Width="150"
+                Height="Auto"
+                MaxHeight="400"
+                FontSize="20"
+                HorizontalAlignment="Left"
+                BorderBrush="{Binding MyTheme.BorderColor}"
+                Background="White"
+                Visibility="{Binding CashierSearchStock.IsProducerNameListBoxVisible}"
+                ItemsSource="{Binding CashierSearchStock.Suggestions}"
+                SelectedItem="{Binding CashierSearchStock.SelectedProducerNameListBoxItem}"
+                    />
+
+        </Canvas>
 
         <Button
             Grid.Column="1"
@@ -282,7 +671,7 @@
             Background="{Binding MyTheme.ButtonBackgroundColor}"
             BorderBrush="{Binding MyTheme.BorderColor}"
             Command="{Binding GoBackCommand}"
-            />
+                />
 
     </Grid>
 

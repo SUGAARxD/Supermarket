@@ -1,4 +1,5 @@
 ﻿using SupermarketApp.Model;
+using SupermarketApp.Model.EntityLayer;
 using SupermarketApp.ViewModel;
 using System.Windows;
 
@@ -9,10 +10,10 @@ namespace SupermarketApp.View
     /// </summary>
     public partial class CashierWindow : Window
     {
-        public CashierWindow(Theme myTheme)
+        public CashierWindow(Theme myTheme, User cashier)
         {
             InitializeComponent();
-            this.DataContext = new CashierVM(myTheme);
+            this.DataContext = new CashierVM(myTheme, cashier);
         }
     }
 }

@@ -2,6 +2,9 @@
 using System.Data.SqlClient;
 using System.Data;
 using SupermarketApp.Model.BusinessLogicLayer;
+using System.Collections.ObjectModel;
+using System.Runtime.Remoting.Messaging;
+using System.Data.Common;
 
 namespace SupermarketApp.Model.DataAccessLayer
 {
@@ -40,6 +43,47 @@ namespace SupermarketApp.Model.DataAccessLayer
                 }
                 return product;
             }
+        }
+        public ObservableCollection<string> GetAllProductsName()
+        {
+            ObservableCollection<string> productsName = new ObservableCollection<string>();
+
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("GetAllProductsName", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    productsName.Add(reader[0].ToString());
+                }
+            }
+
+            return productsName;
+        }
+
+        public ObservableCollection<string> GetAllProductsBarcode()
+        {
+            ObservableCollection<string> productsBarcode = new ObservableCollection<string>();
+
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("GetAllProductsBarcode", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    productsBarcode.Add(reader[0].ToString());
+                }
+            }
+
+            return productsBarcode;
         }
 
         #endregion

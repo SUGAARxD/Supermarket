@@ -1,6 +1,7 @@
 ﻿using System.Data.SqlClient;
 using System.Data;
 using SupermarketApp.Model.EntityLayer;
+using System.Runtime.Remoting;
 
 namespace SupermarketApp.Model.DataAccessLayer
 {
@@ -20,18 +21,22 @@ namespace SupermarketApp.Model.DataAccessLayer
             {
                 SqlCommand command = new SqlCommand("ExistsUser", connection);
                 command.CommandType = CommandType.StoredProcedure;
+                SqlParameter userId = new SqlParameter("@userId", SqlDbType.Int);
+                userId.Direction = ParameterDirection.Output;
                 SqlParameter usernameParameter = new SqlParameter("@username", user.Username);
                 SqlParameter passwordParameter = new SqlParameter("@password", user.Password);
                 SqlParameter userTypeParameter = new SqlParameter("@user_type", user.UserType);
-                SqlParameter usersCountParameter = new SqlParameter("@users_count", SqlDbType.Int);
-                usersCountParameter.Direction = ParameterDirection.Output;
+                command.Parameters.Add(userId);
                 command.Parameters.Add(usernameParameter);
                 command.Parameters.Add(passwordParameter);
                 command.Parameters.Add(userTypeParameter);
-                command.Parameters.Add(usersCountParameter);
                 connection.Open();
                 command.ExecuteNonQuery();
-                return (usersCountParameter.Value as int?) != 0;
+
+                if (string.IsNullOrEmpty(userId.Value.ToString()))
+                    return false;
+                user.Id = (int)userId.Value;
+                return true;
             }
         }
 

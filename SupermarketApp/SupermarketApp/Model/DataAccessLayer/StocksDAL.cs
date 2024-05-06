@@ -107,6 +107,38 @@ namespace SupermarketApp.Model.DataAccessLayer
                 command.ExecuteNonQuery();
             }
         }
+        public void ActivateStock(int id)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("ActivateStock", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter stockExpirationDateParameter = new SqlParameter("@stockId", id);
+                command.Parameters.Add(stockExpirationDateParameter);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void UpdateStockQuantity(Stock stock, int newQuantity)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("UpdateStockQuantity", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter stockIdParameter = new SqlParameter("@stockId", stock.Id);
+                SqlParameter quantityParameter = new SqlParameter("@quantity", newQuantity);
+                command.Parameters.Add(stockIdParameter);
+                command.Parameters.Add(quantityParameter);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+                stock.Quantity = newQuantity;
+            }
+        }
 
         #endregion
     }

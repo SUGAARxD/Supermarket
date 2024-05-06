@@ -41,8 +41,8 @@ namespace SupermarketApp.Model
             }
         }
 
-        private int _subtotal;
-        public int Subtotal
+        private double _subtotal;
+        public double Subtotal
         {
             get => _subtotal;
             set

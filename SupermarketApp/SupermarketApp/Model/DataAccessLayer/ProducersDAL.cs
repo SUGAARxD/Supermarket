@@ -1,6 +1,7 @@
 ﻿using SupermarketApp.Model.EntityLayer;
 using System.Data.SqlClient;
 using System.Data;
+using System.Collections.ObjectModel;
 
 namespace SupermarketApp.Model.DataAccessLayer
 {
@@ -35,6 +36,27 @@ namespace SupermarketApp.Model.DataAccessLayer
             }
         }
 
+        public ObservableCollection<string> GetAllProducersName()
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                ObservableCollection<string> producersName = new ObservableCollection<string>();
+
+                SqlCommand command = new SqlCommand("GetAllProducersName", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    producersName.Add(reader[0].ToString());
+                }
+
+                return producersName;
+            }
+        }
         #endregion
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SupermarketApp.Model;
+using SupermarketApp.Model.EntityLayer;
 using SupermarketApp.View;
 using System.Linq;
 using System.Windows;
@@ -14,9 +15,10 @@ namespace SupermarketApp.ViewModel
 
         }
 
-        public AdministrationVM(Theme myTheme)
+        public AdministrationVM(Theme myTheme, User user)
         {
             MyTheme = myTheme;
+            _user = user;
         }
 
         #region Properties and members
@@ -31,6 +33,19 @@ namespace SupermarketApp.ViewModel
                 NotifyPropertyChanged(nameof(MyTheme));
             }
         }
+
+        private User _user;
+        public User User
+        {
+            get => _user;
+            set
+            {
+                _user = value;
+                NotifyPropertyChanged(nameof(User));
+            }
+        }
+
+
 
         #endregion
 

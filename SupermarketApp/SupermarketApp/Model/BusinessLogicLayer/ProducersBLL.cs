@@ -1,5 +1,6 @@
 ﻿using SupermarketApp.Model.DataAccessLayer;
 using SupermarketApp.Model.EntityLayer;
+using System.Collections.ObjectModel;
 
 namespace SupermarketApp.Model.BusinessLogicLayer
 {
@@ -21,6 +22,11 @@ namespace SupermarketApp.Model.BusinessLogicLayer
         public Producer GetProducer(int id)
         {
             return producersDAL.GetProducer(id);
+        }
+
+        public ObservableCollection<string> GetAllProducersName()
+        {
+            return producersDAL.GetAllProducersName();
         }
 
         #endregion

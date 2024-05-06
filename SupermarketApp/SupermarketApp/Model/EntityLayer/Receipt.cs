@@ -29,8 +29,8 @@ namespace SupermarketApp.Model.EntityLayer
             }
         }
 
-        private float _total = 0;
-        public float Total
+        private double _total = 0;
+        public double Total
         {
             get => _total;
             set

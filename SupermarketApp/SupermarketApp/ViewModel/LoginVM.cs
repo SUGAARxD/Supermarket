@@ -104,14 +104,14 @@ namespace SupermarketApp.ViewModel
                 if (UserType == "Administrator")
                 {
 
-                    AdministrationWindow administrationWindow = new AdministrationWindow(_myTheme);
+                    AdministrationWindow administrationWindow = new AdministrationWindow(_myTheme, _user);
                     administrationWindow.Show();
 
                 }
                 else if (UserType == "Cashier")
                 {
 
-                    CashierWindow cashierWindow = new CashierWindow(_myTheme);
+                    CashierWindow cashierWindow = new CashierWindow(_myTheme, _user);
                     cashierWindow.Show();
 
                 }

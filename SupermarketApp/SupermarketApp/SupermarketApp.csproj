@@ -59,10 +59,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converters\DateToStringConverter.cs" />
+    <Compile Include="Converters\StockModelToCollectionConverter.cs" />
+    <Compile Include="Converters\StringToDateConverter.cs" />
     <Compile Include="Model\BusinessLogicLayer\CategoriesBLL.cs" />
     <Compile Include="Model\BusinessLogicLayer\ProducersBLL.cs" />
     <Compile Include="Model\BusinessLogicLayer\ProductsBLL.cs" />
+    <Compile Include="Model\BusinessLogicLayer\ReceiptsBLL.cs" />
     <Compile Include="Model\BusinessLogicLayer\StocksBLL.cs" />
     <Compile Include="Model\BusinessLogicLayer\UsersBLL.cs" />
     <Compile Include="Model\CashierSearchStockModel.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="Model\DataAccessLayer\DALHelper.cs" />
     <Compile Include="Model\DataAccessLayer\ProducersDAL.cs" />
     <Compile Include="Model\DataAccessLayer\ProductsDAL.cs" />
+    <Compile Include="Model\DataAccessLayer\ReceiptsDAL.cs" />
     <Compile Include="Model\DataAccessLayer\StocksDAL.cs" />
     <Compile Include="Model\DataAccessLayer\UsersDAL.cs" />
     <Compile Include="Model\EntityLayer\Category.cs" />
@@ -83,6 +86,7 @@
     <Compile Include="ViewModel\AdministrationVM.cs" />
     <Compile Include="ViewModel\BaseNotify.cs" />
     <Compile Include="ViewModel\CashierVM.cs" />
+    <Compile Include="ViewModel\DialogBoxVM.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="View\AdministrationWindow.xaml.cs">
@@ -93,6 +97,9 @@
     </Compile>
     <Compile Include="View\CategoriesManagerWindow.xaml.cs">
       <DependentUpon>CategoriesManagerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DialogBox.xaml.cs">
+      <DependentUpon>DialogBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -127,6 +134,10 @@
     <Page Include="View\CategoriesManagerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DialogBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

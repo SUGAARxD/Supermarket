@@ -4,18 +4,9 @@ using System.Windows.Data;
 
 namespace SupermarketApp.Converters
 {
-    public class DateToStringConverter : IValueConverter
+    public class StringToDateConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is DateTime dateTime)
-            {
-                return dateTime.ToShortDateString();
-            }
-            return string.Empty;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is string dateString)
             {
@@ -25,6 +16,15 @@ namespace SupermarketApp.Converters
                 }
             }
             return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is DateTime dateTime)
+            {
+                return dateTime.ToShortDateString();
+            }
+            return string.Empty;
         }
     }
 }

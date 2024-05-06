@@ -1,12 +1,23 @@
-﻿namespace SupermarketApp.Model.EntityLayer
+﻿using SupermarketApp.ViewModel;
+
+namespace SupermarketApp.Model.EntityLayer
 {
-    internal class Stock
+    internal class Stock : BaseNotify
     {
 
         #region Properties and members
 
         public int Id { get; set; }
-        public int Quantity { get; set; }
+        private int _quantity;
+        public int Quantity
+        {
+            get => _quantity;
+            set
+            {
+                _quantity = value;
+                NotifyPropertyChanged(nameof(Quantity));
+            }
+        }
         public string Unit { get; set; }
         public string SupplyDate { get; set; }
         public string ExpirationDate { get; set; }

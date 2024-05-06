@@ -1,0 +1,46 @@
+﻿<Window x:Class="SupermarketApp.View.DialogBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SupermarketApp.View"
+        xmlns:vm="clr-namespace:SupermarketApp.View"
+        mc:Ignorable="d"
+        Title="DialogBox" Height="250" Width="300"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize">
+
+    <Window.DataContext>
+        <vm:DialogBoxVM/>
+    </Window.DataContext>
+
+    <Grid>
+
+        <StackPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+
+
+            <Label 
+                Content = "{Binding DialogBoxMessage}"
+                FontSize="20"
+                Width="250"/>
+
+            <TextBox
+                Text="{Binding TextBoxContent}"
+                FontSize="20"
+                Margin="0,30,0,30"
+                Width="250"/>
+
+            <Button
+                Content="{Binding ButtonContent}"
+                FontSize="20"
+                Width="150"
+                Command="{Binding CloseWindowCommand}"/>
+
+
+        </StackPanel>
+
+    </Grid>
+
+</Window>

@@ -25,6 +25,11 @@ namespace SupermarketApp.Model.BusinessLogicLayer
             return categoriesDAL.GetCategory(id);
         }
 
+        public ObservableCollection<string> GetAllCategoriesName()
+        {
+            return categoriesDAL.GetAllCategoriesName();
+        }
+
         #endregion
     }
 }
