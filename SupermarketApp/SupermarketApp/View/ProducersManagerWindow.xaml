@@ -7,16 +7,260 @@
         xmlns:vm="clr-namespace:SupermarketApp.ViewModel"
         mc:Ignorable="d"
         Title="Producers Manager" 
-        Width="1280" Height="720"
+        Width="1000" Height="600"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
-        Background="{Binding MyTheme.WindowBackgroundColor}">
-
+        Background="{Binding MyTheme.WindowBackgroundColor}"
+        Closing="Window_Closing">
+    
     <Window.DataContext>
         <vm:ProducersManagerVM/>
     </Window.DataContext>
 
     <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.7*"/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            AutoGenerateColumns="False"
+            Width="300"
+            Height="500"
+            FontSize="20"
+            ItemsSource="{Binding Producers}" 
+            IsReadOnly="True"
+            SelectionMode="Single"
+            SelectionUnit="FullRow"
+            CanUserSortColumns="True"
+            CanUserReorderColumns="False"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            CanUserResizeColumns="False"
+            CanUserResizeRows="False"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            BorderBrush="{Binding MyTheme.BorderColor}"
+            SelectedItem="{Binding SelectedProducer}">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                    Header="Name" 
+                    Width="*"
+                    Binding="{Binding Name}"
+                        />
+                <DataGridTextColumn 
+                    Header="Country" 
+                    Width="*"
+                    Binding="{Binding Country}"
+                        />
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+        <StackPanel
+            Grid.Column="1">
+
+            <StackPanel
+                 Orientation="Horizontal"
+                 HorizontalAlignment="Center"
+                 Height="40"
+                 Margin="0,40,0,40">
+
+                <Button
+                     Content="Get Active Producers"
+                     Width="210"
+                     FontSize="20"
+                     Background="{Binding MyTheme.ButtonBackgroundColor}"
+                     BorderBrush="{Binding MyTheme.BorderColor}"
+                     Command="{Binding GetActiveProducersCommand}"
+                         />
+
+                <Button
+                     Content="Get Inactive Producers"
+                     Width="210"
+                     FontSize="20"
+                     Margin="30,0,0,0"
+                     Background="{Binding MyTheme.ButtonBackgroundColor}"
+                     BorderBrush="{Binding MyTheme.BorderColor}"
+                     Command="{Binding GetInactiveProducersCommand}"
+                         />
+
+            </StackPanel>
+            
+            <StackPanel
+                Orientation="Horizontal"
+                Width="310">
+                
+                <StackPanel
+                     Width="150"
+                     Height="70"
+                     Margin="0,0,10,0">
+
+                <Label 
+                     Content="Name"
+                     Height="40"
+                     FontSize="20"
+                     BorderThickness="0,0,0,1"
+                     BorderBrush="{Binding MyTheme.BorderColor}"
+                         />
+
+                <TextBox
+                     Height="30"
+                     FontSize="20"
+                     BorderBrush="{Binding MyTheme.BorderColor}"
+                     Text="{Binding DummyProducer.Name, UpdateSourceTrigger=PropertyChanged}"
+                         />
+
+            </StackPanel>
+
+                <StackPanel
+                     Width="150"
+                     Height="70"
+                     Margin="0,0,10,0">
+
+                    <Label 
+                         Content="Country"
+                         Height="40"
+                         FontSize="20"
+                         BorderThickness="0,0,0,1"
+                         BorderBrush="{Binding MyTheme.BorderColor}"
+                             />
+
+                    <TextBox
+                         Height="30"
+                         FontSize="20"
+                         BorderBrush="{Binding MyTheme.BorderColor}"
+                         Text="{Binding DummyProducer.Country, UpdateSourceTrigger=PropertyChanged}"
+                             />
+
+                </StackPanel>
+
+            </StackPanel>
         
+            <StackPanel
+                Width="180">
+
+                <StackPanel
+                     Orientation="Horizontal"
+                     HorizontalAlignment="Center"
+                     Width="180">
+
+                    <StackPanel
+                         Width="80"
+                         Height="70">
+
+                        <Label
+                             Height="40"
+                             FontSize="20"
+                                />
+
+                        <Button
+                             HorizontalAlignment="Left"
+                             Content="Add"
+                             Height="30"
+                             Width="80"
+                             FontSize="20"
+                             Background="{Binding MyTheme.ButtonBackgroundColor}"
+                             BorderBrush="{Binding MyTheme.BorderColor}"
+                             Command="{Binding AddCommand}"
+                                 />
+
+                    </StackPanel>
+
+                    <StackPanel
+                         Width="80"
+                         Height="70"
+                         Margin="20,0,0,0">
+
+                        <Label
+                             Height="40"
+                             FontSize="20"
+                                />
+
+                        <Button
+                             HorizontalAlignment="Left"
+                             Content="Delete"
+                             Height="30"
+                             Width="80"
+                             FontSize="20"
+                             Background="{Binding MyTheme.ButtonBackgroundColor}"
+                             BorderBrush="{Binding MyTheme.BorderColor}"
+                             Command="{Binding DeleteCommand}"
+                                 />
+
+                    </StackPanel>
+
+                </StackPanel>
+
+                <StackPanel
+                     Orientation="Horizontal"
+                     HorizontalAlignment="Center"
+                     Margin="0,20,0,0"
+                     Width="180">
+
+                    <StackPanel
+                         Width="80"
+                         Height="70">
+
+                        <Label
+                             Height="40"
+                             FontSize="20"
+                                />
+
+                        <Button
+                             HorizontalAlignment="Left"
+                             Content="Modify"
+                             Height="30"
+                             Width="80"
+                             FontSize="20"
+                             Background="{Binding MyTheme.ButtonBackgroundColor}"
+                             BorderBrush="{Binding MyTheme.BorderColor}"
+                             Command="{Binding ModifyCommand}"
+                                 />
+
+                    </StackPanel>
+
+                    <StackPanel
+                         Width="80"
+                         Height="70"
+                         Margin="20,0,0,0">
+
+                        <Label
+                             Height="40"
+                             FontSize="20"
+                                 />
+
+                        <Button
+                             Content="Clear"
+                             Height="30"
+                             Width="80"
+                             FontSize="20"
+                             Background="{Binding MyTheme.ButtonBackgroundColor}"
+                             BorderBrush="{Binding MyTheme.BorderColor}"
+                             Command="{Binding ClearCommand}"
+                                 />
+
+                    </StackPanel>
+
+                </StackPanel>
+
+            </StackPanel>
+
+            <Button
+                Content="Show Products Report"
+                Height="40"
+                Width="210"
+                Margin="0,60,0,0"
+                FontSize="20"
+                Background="{Binding MyTheme.ButtonBackgroundColor}"
+                BorderBrush="{Binding MyTheme.BorderColor}"
+                Command="{Binding ShowReportCommand}"
+                />
+            
+        </StackPanel>
+
     </Grid>
 </Window>

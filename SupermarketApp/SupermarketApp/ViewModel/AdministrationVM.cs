@@ -100,6 +100,9 @@ namespace SupermarketApp.ViewModel
         private void OpenProducersManagerWindow(object parameter)
         {
             ProducersManagerWindow producersManagerWindow = new ProducersManagerWindow(_myTheme);
+
+            Application.Current.Windows.OfType<AdministrationWindow>().FirstOrDefault().Hide();
+
             producersManagerWindow.ShowDialog();
         }
 
@@ -116,6 +119,9 @@ namespace SupermarketApp.ViewModel
         private void OpenCategoriesManagerWindow(object parameter)
         {
             CategoriesManagerWindow categoriesManagerWindow = new CategoriesManagerWindow(_myTheme);
+
+            Application.Current.Windows.OfType<AdministrationWindow>().FirstOrDefault().Hide();
+
             categoriesManagerWindow.ShowDialog();
         }
 
@@ -132,6 +138,9 @@ namespace SupermarketApp.ViewModel
         private void OpenStocksManagerWindow(object parameter)
         {
             StocksManagerWindow stocksManagerWindow = new StocksManagerWindow(_myTheme);
+
+            Application.Current.Windows.OfType<AdministrationWindow>().FirstOrDefault().Hide();
+
             stocksManagerWindow.ShowDialog();
         }
 
@@ -148,6 +157,9 @@ namespace SupermarketApp.ViewModel
         private void OpenReceiptsManagerWindow(object parameter)
         {
             ReceiptsManagerWindow receiptsManagerWindow = new ReceiptsManagerWindow(_myTheme);
+
+            Application.Current.Windows.OfType<AdministrationWindow>().FirstOrDefault().Hide();
+
             receiptsManagerWindow.ShowDialog();
         }
 
@@ -164,6 +176,9 @@ namespace SupermarketApp.ViewModel
         private void OpenUsersManagerWindow(object parameter)
         {
             UsersManagerWindow usersManagerWindow = new UsersManagerWindow(_myTheme);
+
+            Application.Current.Windows.OfType<AdministrationWindow>().FirstOrDefault().Hide();
+
             usersManagerWindow.ShowDialog();
         }
 

@@ -2,7 +2,7 @@
 
 namespace SupermarketApp.Model.EntityLayer
 {
-    internal class Producer : BaseNotify
+    public class Producer : BaseNotify
     {
 
         #region Properties and members

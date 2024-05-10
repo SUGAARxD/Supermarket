@@ -312,6 +312,7 @@ namespace SupermarketApp.ViewModel
 
                             _stocksBLL.UpdateStockQuantity(SearchedStock, SearchedStock.Quantity + item.Quantity);
                             Receipt.Total -= item.Subtotal;
+                            Receipt.Total = Math.Round(Receipt.Total, 2);
                             ProductsList.Remove(item);
                         }
                         else
@@ -321,6 +322,7 @@ namespace SupermarketApp.ViewModel
                             item.Quantity += quantity;
                             item.Subtotal = Math.Round(item.Stock.SalePrice * item.Quantity, 2);
                             Receipt.Total += item.Subtotal;
+                            Receipt.Total = Math.Round(Receipt.Total, 2);
                             if (SearchedStock.Quantity == 0)
                                 SearchedStock = null;
                         }
@@ -342,6 +344,7 @@ namespace SupermarketApp.ViewModel
                 stockReceipt.Quantity = quantity;
                 stockReceipt.Subtotal = Math.Round(SearchedStock.SalePrice * stockReceipt.Quantity, 2);
                 Receipt.Total += stockReceipt.Subtotal;
+                Receipt.Total = Math.Round(Receipt.Total, 2);
                 ProductsList.Add(stockReceipt);
                 if (SearchedStock.Quantity == 0)
                     SearchedStock = null;

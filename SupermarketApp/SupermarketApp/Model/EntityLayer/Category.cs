@@ -2,7 +2,7 @@
 
 namespace SupermarketApp.Model.EntityLayer
 {
-    internal class Category : BaseNotify
+    public class Category : BaseNotify
     {
 
         #region Properties and members

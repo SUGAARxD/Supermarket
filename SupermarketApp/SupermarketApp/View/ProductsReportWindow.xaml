@@ -1,0 +1,61 @@
+﻿<Window x:Class="SupermarketApp.View.ProductsReportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SupermarketApp.View"
+        xmlns:vm="clr-namespace:SupermarketApp.ViewModel"
+        mc:Ignorable="d"
+        Title="Products Report" 
+        Height="600" Width="600"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.DataContext>
+        <vm:ProductsReportVM/>
+    </Window.DataContext>
+
+    <Grid>
+
+        <DataGrid
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            AutoGenerateColumns="False"
+            Width="500"
+            Height="550"
+            FontSize="20"
+            ItemsSource="{Binding Products}" 
+            IsReadOnly="True"
+            SelectionMode="Single"
+            SelectionUnit="FullRow"
+            CanUserSortColumns="True"
+            CanUserReorderColumns="False"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            CanUserResizeColumns="False"
+            CanUserResizeRows="False"
+            ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                    Header="Name" 
+                    Width="*"
+                    Binding="{Binding Name}"
+                />
+                <DataGridTextColumn 
+                    Header="Barcode" 
+                    Width="*"
+                    Binding="{Binding Barcode}"
+                />
+                <DataGridTextColumn 
+                    Header="Category" 
+                    Width="*"
+                    Binding="{Binding Category.Name}"
+                />
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+    </Grid>
+    
+</Window>

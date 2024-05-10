@@ -51,6 +51,8 @@
                 FontSize="20"
                 ItemsSource="{Binding ProductsList}" 
                 IsReadOnly="True"
+                SelectionMode="Single"
+                SelectionUnit="FullRow"
                 CanUserReorderColumns="False"
                 CanUserAddRows="False"
                 CanUserDeleteRows="False"
@@ -388,7 +390,7 @@
                     </StackPanel>
 
                     <StackPanel
-                        Width="125">
+                        Width="110">
 
                         <Label
                             Content="Barcode"
@@ -415,7 +417,7 @@
                     </StackPanel>
 
                     <StackPanel
-                        Width="100">
+                        Width="80">
 
                         <Label
                             Content="Price"
@@ -434,6 +436,33 @@
 
                             <TextBlock 
                                 Text="{Binding SearchedStock.SalePrice}" 
+                                TextWrapping="Wrap"
+                                    />
+
+                        </Label>
+
+                    </StackPanel>
+                    
+                    <StackPanel
+                        Width="80">
+
+                        <Label
+                            Content="Unit"
+                            FontSize="20"
+                            Background="white"
+                            BorderThickness="1,2,1,1"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                                />
+
+                        <Label
+                            Height="95"
+                            FontSize="20"
+                            Background="white"
+                            BorderThickness="1,1,1,2"
+                            BorderBrush="{Binding MyTheme.BorderColor}">
+
+                            <TextBlock 
+                                Text="{Binding SearchedStock.Unit}" 
                                 TextWrapping="Wrap"
                                     />
 
@@ -538,10 +567,10 @@
                     </StackPanel>
 
                     <StackPanel
-                        Width="150">
+                        Width="120">
 
                         <Label
-                            Content="Expiration Date"
+                            Content="Exp. Date"
                             FontSize="20"
                             Background="white"
                             BorderThickness="1,2,2,1"

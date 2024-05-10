@@ -144,6 +144,138 @@ namespace SupermarketApp.Model.DataAccessLayer
             }
         }
 
+        public void UpdateProduct(Product product)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("UpdateProduct", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlParameter idParameter = new SqlParameter("@productId", product.Id);
+                SqlParameter nameParameter = new SqlParameter("@productName", product.Name);
+                SqlParameter barcodeParameter = new SqlParameter("@productBarcode", product.Barcode);
+                SqlParameter categoryIdParameter = new SqlParameter("@categoryId", product.Category.Id);
+                SqlParameter producerIdParameter = new SqlParameter("@producerId", product.Producer.Id);
+
+                command.Parameters.Add(idParameter);
+                command.Parameters.Add(nameParameter);
+                command.Parameters.Add(barcodeParameter);
+                command.Parameters.Add(categoryIdParameter);
+                command.Parameters.Add(producerIdParameter);
+
+                connection.Open();
+
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public bool ExistsProduct(Product product)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("ExistsProduct", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlParameter nameParameter = new SqlParameter("@productName", product.Name);
+                SqlParameter barcodeParameter = new SqlParameter("@productBarcode", product.Barcode);
+                SqlParameter categoryIdParameter = new SqlParameter("@categoryId", product.Category.Id);
+                SqlParameter producerIdParameter = new SqlParameter("@producerId", product.Producer.Id);
+
+                command.Parameters.Add(nameParameter);
+                command.Parameters.Add(barcodeParameter);
+                command.Parameters.Add(categoryIdParameter);
+                command.Parameters.Add(producerIdParameter);
+
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    return (int)(reader[0]) != 0;
+                }
+                return false;
+            }
+        }
+
+        public bool ExistsInactiveProduct(Product product)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("ExistsInactiveProduct", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlParameter nameParameter = new SqlParameter("@productName", product.Name);
+                SqlParameter barcodeParameter = new SqlParameter("@productBarcode", product.Barcode);
+                SqlParameter categoryIdParameter = new SqlParameter("@categoryId", product.Category.Id);
+                SqlParameter producerIdParameter = new SqlParameter("@producerId", product.Producer.Id);
+
+                command.Parameters.Add(nameParameter);
+                command.Parameters.Add(barcodeParameter);
+                command.Parameters.Add(categoryIdParameter);
+                command.Parameters.Add(producerIdParameter);
+
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    return (int)(reader[0]) != 0;
+                }
+                return false;
+            }
+        }
+
+        public void AddProduct(Product product)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("AddProduct", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlParameter nameParameter = new SqlParameter("@productName", product.Name);
+                SqlParameter barcodeParameter = new SqlParameter("@productBarcode", product.Barcode);
+                SqlParameter categoryIdParameter = new SqlParameter("@categoryId", product.Category.Id);
+                SqlParameter producerIdParameter = new SqlParameter("@producerId", product.Producer.Id);
+
+                command.Parameters.Add(nameParameter);
+                command.Parameters.Add(barcodeParameter);
+                command.Parameters.Add(categoryIdParameter);
+                command.Parameters.Add(producerIdParameter);
+
+                connection.Open();
+
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void DeleteProduct(Product product)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("DeleteProduct", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlParameter idParameter = new SqlParameter("@productId", product.Id);
+
+                command.Parameters.Add(idParameter);
+
+                connection.Open();
+
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void ActivateProduct(Product product)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("ActivateProduct", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlParameter idParameter = new SqlParameter("@productId", product.Id);
+
+                command.Parameters.Add(idParameter);
+
+                connection.Open();
+
+                command.ExecuteNonQuery();
+            }
+        }
+
         #endregion
     }
 }

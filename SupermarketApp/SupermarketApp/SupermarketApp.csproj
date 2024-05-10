@@ -91,6 +91,7 @@
     <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\ProducersManagerVM.cs" />
     <Compile Include="ViewModel\ProductsManagerVM.cs" />
+    <Compile Include="ViewModel\ProductsReportVM.cs" />
     <Compile Include="ViewModel\ReceiptsManagerVM.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\StocksManagerVM.cs" />
@@ -119,6 +120,9 @@
     </Compile>
     <Compile Include="View\ProductsManagerWindow.xaml.cs">
       <DependentUpon>ProductsManagerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProductsReportWindow.xaml.cs">
+      <DependentUpon>ProductsReportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ReceiptsManagerWindow.xaml.cs">
       <DependentUpon>ReceiptsManagerWindow.xaml</DependentUpon>
@@ -154,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ProductsManagerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ProductsReportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

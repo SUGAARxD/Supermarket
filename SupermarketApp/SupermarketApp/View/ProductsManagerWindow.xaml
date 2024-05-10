@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:SupermarketApp.ViewModel"
         mc:Ignorable="d"
         Title="Products Manager" 
-        Width="1024" Height="576"
+        Width="1280" Height="720"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         Background="{Binding MyTheme.WindowBackgroundColor}"
@@ -20,20 +20,22 @@
     <Grid>
         
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         
         
         <DataGrid
             Grid.Column="0"
-            HorizontalAlignment="Right"
+            HorizontalAlignment="Center"
             AutoGenerateColumns="False"
             Width="600"
-            Height="500"
+            Height="650"
             FontSize="20"
             ItemsSource="{Binding Products}" 
-            IsReadOnly="False"
+            IsReadOnly="True"
+            SelectionMode="Single"
+            SelectionUnit="FullRow"
             CanUserSortColumns="True"
             CanUserReorderColumns="False"
             CanUserAddRows="False"
@@ -42,7 +44,8 @@
             CanUserResizeRows="False"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
             BorderBrush="{Binding MyTheme.BorderColor}"
-            SelectedItem="{Binding SelectedProduct}">
+            SelectedItem="{Binding SelectedProduct}"
+            >
 
             <DataGrid.Columns>
                 <DataGridTextColumn 
@@ -70,17 +73,17 @@
         </DataGrid>
 
         <StackPanel
-            Grid.Column="1"
-            Height="200">
+            Grid.Column="1">
 
             <StackPanel
                 Orientation="Horizontal"
                 HorizontalAlignment="Center"
-                Height="35">
+                Height="40"
+                Margin="0,40,0,80">
 
                 <Button
-                    Content="Active Products"
-                    Width="170"
+                    Content="Get Active Products"
+                    Width="200"
                     FontSize="20"
                     Background="{Binding MyTheme.ButtonBackgroundColor}"
                     BorderBrush="{Binding MyTheme.BorderColor}"
@@ -88,8 +91,8 @@
                         />
 
                 <Button
-                    Content="Inactive Products"
-                    Width="170"
+                    Content="Get Inactive Products"
+                    Width="200"
                     FontSize="20"
                     Margin="30,0,0,0"
                     Background="{Binding MyTheme.ButtonBackgroundColor}"
@@ -99,7 +102,210 @@
 
             </StackPanel>
 
+            <StackPanel
+                Width="600">
+
+
+                <StackPanel
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Width="600">
+
+                    <StackPanel
+                        Width="150"
+                        Height="70"
+                        Margin="0,0,10,0">
+
+                        <Label 
+                            Content="Name"
+                            Height="40"
+                            FontSize="20"
+                            BorderThickness="0,0,0,1"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                                />
+
+                        <TextBox
+                            Height="30"
+                            FontSize="20"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                            Text="{Binding DummyProduct.Name, UpdateSourceTrigger=PropertyChanged}"
+                                />
+
+                    </StackPanel>
+
+                    <StackPanel
+                        Width="150"
+                        Height="70">
+
+                        <Label 
+                            Content="Barcode"
+                            Height="40"
+                            FontSize="20"
+                            BorderThickness="0,0,0,1"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                                />
+
+                        <TextBox
+                            Height="30"
+                            FontSize="20"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                            Text="{Binding DummyProduct.Barcode, UpdateSourceTrigger=PropertyChanged}"
+                                />
+
+                    </StackPanel>
+
+                    <StackPanel
+                        Width="80"
+                        Height="70"
+                        Margin="20,0,0,0">
+
+                        <Label
+                            Height="40"
+                            FontSize="20"
+                               />
+
+                        <Button
+                            HorizontalAlignment="Left"
+                            Content="Add"
+                            Height="30"
+                            Width="80"
+                            FontSize="20"
+                            Background="{Binding MyTheme.ButtonBackgroundColor}"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                            Command="{Binding AddCommand}"
+                                />
+
+                    </StackPanel>
+
+                    <StackPanel
+                        Width="80"
+                        Height="70"
+                        Margin="20,0,0,0">
+
+                        <Label
+                            Height="40"
+                            FontSize="20"
+           />
+
+                        <Button
+                            HorizontalAlignment="Left"
+                            Content="Delete"
+                            Height="30"
+                            Width="80"
+                            FontSize="20"
+                            Background="{Binding MyTheme.ButtonBackgroundColor}"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                            Command="{Binding DeleteCommand}"
+                                />
+
+                    </StackPanel>
+
+                </StackPanel>
+
+                <StackPanel
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0,20,0,0"
+                    Width="600">
+
+                    <StackPanel
+                        Width="150"
+                        Height="70"
+                        Margin="0,0,10,0">
+
+                        <Label 
+                            Content="Category"
+                            Height="40"
+                            FontSize="20"
+                            BorderThickness="0,0,0,1"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                                />
+
+                        <ComboBox
+                            Height="30"
+                            FontSize="20"
+                            ItemsSource="{Binding Categories}"
+                            DisplayMemberPath="Name"
+                            Text="{Binding DummyProduct.Category.Name}"
+                            SelectedItem="{Binding DummyProduct.Category}"
+                                />
+
+                    </StackPanel>
+
+                    <StackPanel
+                        Width="150"
+                        Height="70">
+
+                        <Label 
+                            Content="Producer"
+                            Height="40"
+                            FontSize="20"
+                            BorderThickness="0,0,0,1"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                                />
+
+                        <ComboBox
+                            Height="30"
+                            FontSize="20"
+                            ItemsSource="{Binding Producers}"
+                            DisplayMemberPath="Name"
+                            Text="{Binding DummyProduct.Producer.Name}"
+                            SelectedItem="{Binding DummyProduct.Producer}"
+                                />
+
+                    </StackPanel>
+
+                    <StackPanel
+                        Width="80"
+                        Height="70"
+                        Margin="20,0,0,0">
+
+                        <Label
+                            Height="40"
+                            FontSize="20"
+                               />
+
+                        <Button
+                            HorizontalAlignment="Left"
+                            Content="Modify"
+                            Height="30"
+                            Width="80"
+                            FontSize="20"
+                            Background="{Binding MyTheme.ButtonBackgroundColor}"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                            Command="{Binding ModifyCommand}"
+                                />
+
+                    </StackPanel>
+
+                    <StackPanel
+                        Width="80"
+                        Height="70"
+                        Margin="20,0,0,0">
+
+                        <Label
+                            Height="40"
+                            FontSize="20"
+                            />
+
+                        <Button
+                            Content="Clear"
+                            Height="30"
+                            Width="80"
+                            FontSize="20"
+                            Background="{Binding MyTheme.ButtonBackgroundColor}"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                            Command="{Binding ClearCommand}"
+                            />
+
+                    </StackPanel>
+
+                </StackPanel>
+
+            </StackPanel>
+
         </StackPanel>
 
     </Grid>
+
 </Window>
