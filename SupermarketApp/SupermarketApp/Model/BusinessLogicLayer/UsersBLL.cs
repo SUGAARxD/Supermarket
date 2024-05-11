@@ -108,18 +108,15 @@ namespace SupermarketApp.Model.BusinessLogicLayer
             usersDAL.DeleteUser(user);
         }
 
-        public ObservableCollection<Product> GetReceiptReport(User user, string ReportDate)
+        public ObservableCollection<Tuple<string, double>> GetCashedAmounts(User user, string ReportMonth, string ReportYear)
         {
             if (user == null)
                 throw new Exception("Please select a user first!");
 
-            if (string.IsNullOrEmpty(ReportDate))
-                throw new Exception("Please select a date first!");
+            if (string.IsNullOrEmpty(ReportMonth) || string.IsNullOrEmpty(ReportYear))
+                throw new Exception("Date fields can't be empty!");
 
-
-            ObservableCollection<Product> products = new ObservableCollection<Product>();
-
-            return products;
+            return usersDAL.GetCashedAmounts(user, ReportMonth, ReportYear);
         }
 
         #endregion

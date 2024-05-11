@@ -22,6 +22,30 @@ namespace SupermarketApp.ViewModel
                 "Administrator",
                 "Cashier"
             };
+            Months = new ObservableCollection<string>
+            {
+                "",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12"
+            };
+            Years = new ObservableCollection<string>
+            {
+                ""
+            };
+            for (int year = DateTime.Now.Date.Year; year >= DateTime.Now.Date.Year - 100; --year)
+            {
+                Years.Add(year.ToString());
+            }
         }
 
         #region Properties and members
@@ -30,6 +54,9 @@ namespace SupermarketApp.ViewModel
 
         public ObservableCollection<User> Users { get; set; } = new ObservableCollection<User>();
         public ObservableCollection<string> UserTypes { get; set; }
+        public ObservableCollection<string> Months { get; set; }
+
+        public ObservableCollection<string> Years { get; set; }
 
         private string ActiveOrInactive = " ";
 
@@ -75,14 +102,25 @@ namespace SupermarketApp.ViewModel
             }
         }
 
-        private string _reportDate;
-        public string ReportDate
+        private string _reportMonth;
+        public string ReportMonth
         {
-            get => _reportDate;
+            get => _reportMonth;
             set
             {
-                _reportDate = value;
-                NotifyPropertyChanged(nameof(ReportDate));
+                _reportMonth = value;
+                NotifyPropertyChanged(nameof(ReportMonth));
+            }
+        }
+
+        private string _reportYear;
+        public string ReportYear
+        {
+            get => _reportYear;
+            set
+            {
+                _reportYear = value;
+                NotifyPropertyChanged(nameof(ReportYear));
             }
         }
 
@@ -236,41 +274,28 @@ namespace SupermarketApp.ViewModel
             return SelectedUser != null && ActiveOrInactive.Equals("Active");
         }
 
-        private ICommand _showReportCommand;
-        public ICommand ShowReportCommand
+        private ICommand _showCashedAmountsCommand;
+        public ICommand ShowCashedAmountsCommand
         {
             get
             {
-                if (_showReportCommand == null)
-                    _showReportCommand = new RelayCommand(ShowReceiptReport);
-                return _showReportCommand;
+                if (_showCashedAmountsCommand == null)
+                    _showCashedAmountsCommand = new RelayCommand(ShowCashedAmounts);
+                return _showCashedAmountsCommand;
             }
         }
-        private void ShowReceiptReport(object parameter)
+        private void ShowCashedAmounts(object parameter)
         {
             try
             {
-                ObservableCollection<Product> products = _userBLL.GetReceiptReport(SelectedUser, ReportDate);
+                ObservableCollection<Tuple<string, double>> cashedAmounts = _userBLL.GetCashedAmounts(SelectedUser, ReportMonth, ReportYear);
+                CashedAmountsWindow cashedAmountsWindow = new CashedAmountsWindow(cashedAmounts);
+                cashedAmountsWindow.ShowDialog();
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }
-        }
-
-        private ICommand _clearDateCommand;
-        public ICommand ClearDateCommand
-        {
-            get
-            {
-                if (_clearDateCommand == null)
-                    _clearDateCommand = new RelayCommand(ClearDate);
-                return _clearDateCommand;
-            }
-        }
-        private void ClearDate(object parameter)
-        {
-            ReportDate = "";
         }
 
         private ICommand _showPasswordCommand;
@@ -319,7 +344,8 @@ namespace SupermarketApp.ViewModel
             DummyUser.UserType = null;
             DummyUser.Password = "";
             DummyUser.Id = -1;
-            ReportDate = "";
+            ReportMonth = "";
+            ReportYear = "";
         }
 
         #endregion

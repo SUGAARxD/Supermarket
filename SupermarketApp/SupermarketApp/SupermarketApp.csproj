@@ -85,6 +85,7 @@
     <Compile Include="Utilities\FileHelper.cs" />
     <Compile Include="ViewModel\AdministrationVM.cs" />
     <Compile Include="ViewModel\BaseNotify.cs" />
+    <Compile Include="ViewModel\CashedAmountsVM.cs" />
     <Compile Include="ViewModel\CashierVM.cs" />
     <Compile Include="ViewModel\CategoriesManagerVM.cs" />
     <Compile Include="ViewModel\DialogBoxVM.cs" />
@@ -98,6 +99,9 @@
     <Compile Include="ViewModel\UsersManagerVM.cs" />
     <Compile Include="View\AdministrationWindow.xaml.cs">
       <DependentUpon>AdministrationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CashedAmountsWindow.xaml.cs">
+      <DependentUpon>CashedAmountsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CashierWindow.xaml.cs">
       <DependentUpon>CashierWindow.xaml</DependentUpon>
@@ -136,6 +140,10 @@
     <Page Include="View\AdministrationWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CashedAmountsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CashierWindow.xaml">
       <SubType>Designer</SubType>

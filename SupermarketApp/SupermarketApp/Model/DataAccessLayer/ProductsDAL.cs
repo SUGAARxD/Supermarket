@@ -56,7 +56,9 @@ namespace SupermarketApp.Model.DataAccessLayer
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    productsName.Add(reader[0].ToString());
+                    string productName = reader[0].ToString();
+                    if (!productsName.Contains(productName))
+                        productsName.Add(productName);
                 }
 
                 return productsName;

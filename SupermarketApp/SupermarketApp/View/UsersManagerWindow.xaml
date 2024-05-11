@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupermarketApp.View"
         xmlns:vm="clr-namespace:SupermarketApp.ViewModel"
-        xmlns:convert="clr-namespace:SupermarketApp.Converters"
         mc:Ignorable="d"
         Title="Users Manager"
         Width="1100" Height="700"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
+        Background="{Binding MyTheme.WindowBackgroundColor}"
         Closing="Window_Closing">
 
     <Window.DataContext>
@@ -301,44 +301,62 @@
 
             <StackPanel
                 Orientation="Horizontal"
-                Margin="0,40,0,0"
-                Width="180">
+                Width="155"
+                Margin="0,40,0,0">
 
-                <StackPanel.Resources>
-                    <convert:StringToDateConverter x:Key="StringToDateConverter" />
+                <StackPanel
+                    Width="70"
+                    Height="80"
+                    Margin="0,0,10,0">
 
-                    <Style TargetType="DatePickerTextBox">
-                        <Setter Property="IsEnabled" Value="False" />
-                    </Style>
-                </StackPanel.Resources>
+                    <Label 
+                         Content="Month"
+                         Height="40"
+                         FontSize="20"
+                             />
 
-                <DatePicker
-                    Width="150"
-                    FontSize="20"
-                    BorderBrush="{Binding MyTheme.BorderColor}"
-                    SelectedDate="{Binding ReportDate, Converter={StaticResource StringToDateConverter}, Mode=TwoWay}" />
-
-                <Button
-                    Content="X"
-                    Width="30"
-                    Background="{Binding MyTheme.ButtonBackgroundColor}"
-                    BorderBrush="{Binding MyTheme.BorderColor}"
-                    Command="{Binding ClearDateCommand}"
+                    <ComboBox
+                        FontSize="20"
+                        Margin="0,3,0,0"
+                        MaxDropDownHeight="140"
+                        ItemsSource="{Binding Months}"
+                        SelectedItem="{Binding ReportMonth}"
                         />
 
-                <Button/>
+                </StackPanel>
+
+                <StackPanel
+                    Width="70"
+                    Height="80"
+                    Margin="0,0,10,0">
+
+                    <Label 
+                         Content="Year"
+                         Height="40"
+                         FontSize="20"
+                             />
+
+                    <ComboBox
+                        FontSize="20"
+                        Margin="0,3,0,0"
+                        MaxDropDownHeight="140"
+                        ItemsSource="{Binding Years}"
+                        SelectedItem="{Binding ReportYear}"
+                        />
+
+                </StackPanel>
 
             </StackPanel>
 
             <Button
-                Content="Show Receipt Report"
+                Content="Show cashed amounts"
                 Height="40"
-                Width="190"
+                Width="215"
                 FontSize="20"
                 Margin="0,20,0,0"
                 Background="{Binding MyTheme.ButtonBackgroundColor}"
                 BorderBrush="{Binding MyTheme.BorderColor}"
-                Command="{Binding ShowReportCommand}"
+                Command="{Binding ShowCashedAmountsCommand}"
                     />
 
         </StackPanel>

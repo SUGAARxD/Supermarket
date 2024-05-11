@@ -47,7 +47,7 @@ namespace SupermarketApp.Model.DataAccessLayer
                 {
                     receipt.Id = int.Parse(receiptIdParameter.Value.ToString());
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return null;
                 }

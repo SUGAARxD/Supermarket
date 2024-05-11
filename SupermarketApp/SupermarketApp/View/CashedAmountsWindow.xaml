@@ -1,0 +1,56 @@
+﻿<Window x:Class="SupermarketApp.View.CashedAmountsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SupermarketApp.View"
+        xmlns:vm="clr-namespace:SupermarketApp.ViewModel"
+        mc:Ignorable="d"
+        Title="Cashed Amounts" 
+        Height="600" Width="500"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.DataContext>
+        <vm:CashedAmountsVM/>
+    </Window.DataContext>
+
+    <Grid>
+
+        <DataGrid
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            AutoGenerateColumns="False"
+            Width="400"
+            Height="550"
+            FontSize="20"
+            ItemsSource="{Binding CashedAmounts}" 
+            IsReadOnly="True"
+            SelectionMode="Single"
+            SelectionUnit="FullRow"
+            CanUserSortColumns="True"
+            CanUserReorderColumns="False"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            CanUserResizeColumns="False"
+            CanUserResizeRows="False"
+            ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                    Header="Day" 
+                    Width="*"
+                    Binding="{Binding Item1}"
+                         />
+                <DataGridTextColumn 
+                    Header="Cashed Amount" 
+                    Width="*"
+                    Binding="{Binding Item2}"
+                       />
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+    </Grid>
+
+</Window>

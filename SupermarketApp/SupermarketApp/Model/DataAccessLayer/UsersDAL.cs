@@ -4,6 +4,7 @@ using SupermarketApp.Model.EntityLayer;
 using System.Runtime.Remoting;
 using SupermarketApp.Model.BusinessLogicLayer;
 using System.Collections.ObjectModel;
+using System;
 
 namespace SupermarketApp.Model.DataAccessLayer
 {
@@ -188,6 +189,34 @@ namespace SupermarketApp.Model.DataAccessLayer
                 connection.Open();
 
                 command.ExecuteNonQuery();
+            }
+        }
+
+        public ObservableCollection<Tuple<string, double>> GetCashedAmounts(User user, string ReportMonth, string ReportYear)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("GetCashedAmounts", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlParameter idParameter = new SqlParameter("@cashierId", user.Id);
+                SqlParameter reportMonthParameter = new SqlParameter("@reportMonth", ReportMonth);
+                SqlParameter reportYearParameter = new SqlParameter("@reportYear", ReportYear);
+
+                command.Parameters.Add(idParameter);
+                command.Parameters.Add(reportMonthParameter);
+                command.Parameters.Add(reportYearParameter);
+
+                connection.Open();
+
+                ObservableCollection<Tuple<string, double>> cashedAmounts = new ObservableCollection<Tuple<string, double>>();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    cashedAmounts.Add(Tuple.Create(reader[0].ToString(), (double)(reader[1])));
+                }
+
+                return cashedAmounts;
             }
         }
 
