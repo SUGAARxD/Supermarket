@@ -2,6 +2,8 @@
 using System.Data;
 using SupermarketApp.Model.EntityLayer;
 using System.Runtime.Remoting;
+using SupermarketApp.Model.BusinessLogicLayer;
+using System.Collections.ObjectModel;
 
 namespace SupermarketApp.Model.DataAccessLayer
 {
@@ -37,6 +39,155 @@ namespace SupermarketApp.Model.DataAccessLayer
                     return false;
                 user.Id = (int)userId.Value;
                 return true;
+            }
+        }
+
+        public void GetAllActiveUsers(ObservableCollection<User> Users)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("GetAllActiveUsers", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                connection.Open();
+
+                Users.Clear();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    User user = new User();
+                    user.Id = (int)(reader[0]);
+                    user.Username = reader[1].ToString();
+                    user.Password = reader[2].ToString();
+                    user.UserType = reader[3].ToString();
+
+                    Users.Add(user);
+                }
+            }
+        }
+
+        public void GetAllInactiveUsers(ObservableCollection<User> Users)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("GetAllInactiveUsers", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                connection.Open();
+
+                Users.Clear();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    User user = new User();
+                    user.Id = (int)(reader[0]);
+                    user.Username = reader[1].ToString();
+                    user.Password = reader[2].ToString();
+                    user.UserType = reader[3].ToString();
+
+                    Users.Add(user);
+                }
+            }
+        }
+
+        public void UpdateUser(User user)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("UpdateUser", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlParameter idParameter = new SqlParameter("@userId", user.Id);
+                SqlParameter nameParameter = new SqlParameter("@username", user.Username);
+                SqlParameter passwordParameter = new SqlParameter("@password", user.Password);
+                SqlParameter userTypeParameter = new SqlParameter("@userType", user.UserType);
+
+                command.Parameters.Add(idParameter);
+                command.Parameters.Add(nameParameter);
+                command.Parameters.Add(passwordParameter);
+                command.Parameters.Add(userTypeParameter);
+
+                connection.Open();
+
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public bool ExistsInactiveUser(User user)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("ExistsInactiveUser", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlParameter nameParameter = new SqlParameter("@username", user.Username);
+                SqlParameter passwordParameter = new SqlParameter("@password", user.Password);
+                SqlParameter userTypeParameter = new SqlParameter("@userType", user.UserType);
+
+                command.Parameters.Add(nameParameter);
+                command.Parameters.Add(passwordParameter);
+                command.Parameters.Add(userTypeParameter);
+
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    return (int)(reader[0]) != 0;
+                }
+                return false;
+            }
+        }
+
+        public void AddUser(User user)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("AddUser", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlParameter nameParameter = new SqlParameter("@username", user.Username);
+                SqlParameter passwordParameter = new SqlParameter("@password", user.Password);
+                SqlParameter userTypeParameter = new SqlParameter("@userType", user.UserType);
+
+                command.Parameters.Add(nameParameter);
+                command.Parameters.Add(passwordParameter);
+                command.Parameters.Add(userTypeParameter);
+
+                connection.Open();
+
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void DeleteUser(User user)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("DeleteUser", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlParameter idParameter = new SqlParameter("@userId", user.Id);
+
+                command.Parameters.Add(idParameter);
+
+                connection.Open();
+
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void ActivateUser(User user)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("ActivateUser", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlParameter idParameter = new SqlParameter("@userId", user.Id);
+
+                command.Parameters.Add(idParameter);
+
+                connection.Open();
+
+                command.ExecuteNonQuery();
             }
         }
 

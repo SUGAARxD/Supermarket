@@ -59,7 +59,7 @@ namespace SupermarketApp.Model.BusinessLogicLayer
             {
                 throw new Exception(e.Message);
             }
-            if (ExistsProduct(product) && productsDAL.ExistsInactiveProduct(product))
+            if (ExistsProduct(product) || productsDAL.ExistsInactiveProduct(product))
                 throw new Exception("Product exists!");
 
             productsDAL.UpdateProduct(product);

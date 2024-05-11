@@ -32,12 +32,6 @@ namespace SupermarketApp.ViewModel
 
         private UsersBLL _usersBLL = new UsersBLL();
 
-        private ObservableCollection<User> UsersList
-        {
-            get => _usersBLL.UsersList;
-            set => _usersBLL.UsersList = value;
-        }
-
         private User _user;
         public string Username
         {

@@ -56,7 +56,7 @@ namespace SupermarketApp.Model.BusinessLogicLayer
             {
                 throw new Exception(e.Message);
             }
-            if (ExistsProducer(producer) && producersDAL.ExistsInactiveProducer(producer))
+            if (ExistsProducer(producer) || producersDAL.ExistsInactiveProducer(producer))
                 throw new Exception("Producer exists!");
 
             producersDAL.UpdateProducer(producer);
@@ -94,7 +94,8 @@ namespace SupermarketApp.Model.BusinessLogicLayer
         {
             string stringPattern = @"^[a-zA-Z0-9\s]+(- [a-zA-Z0-9\s]+)?$";
 
-            if (string.IsNullOrEmpty(producer.Name))
+            if (string.IsNullOrEmpty(producer.Name)
+                || string.IsNullOrEmpty(producer.Country))
                 throw new Exception("Fields can't be empty!");
 
             if (producer.Name.Length > 100)
@@ -104,7 +105,7 @@ namespace SupermarketApp.Model.BusinessLogicLayer
                 throw new Exception("Country should have maximum 100 characters!");
 
             if (!Regex.IsMatch(producer.Name, stringPattern) || !Regex.IsMatch(producer.Country, stringPattern))
-                throw new Exception("Producer name must include only letters or numbers and may have a '-' or empty space in between!");
+                throw new Exception("Producer name or country must include only letters or numbers and may have a '-' or empty space in between!");
         }
 
         public void DeleteProducer(Producer producer)

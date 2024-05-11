@@ -56,7 +56,7 @@ namespace SupermarketApp.Model.BusinessLogicLayer
             {
                 throw new Exception(e.Message);
             }
-            if (ExistsCategory(category) && categoriesDAL.ExistsInactiveCategory(category))
+            if (ExistsCategory(category) || categoriesDAL.ExistsInactiveCategory(category))
                 throw new Exception("Category exists!");
 
             categoriesDAL.UpdateCategory(category);

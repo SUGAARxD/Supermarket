@@ -21,12 +21,12 @@ namespace SupermarketApp.Model.BusinessLogicLayer
 
         #region Methods
 
-        public ObservableCollection<Stock> GetAllStocks(CashierSearchStockModel searchStockParameters)
+        public ObservableCollection<Stock> GetAllSearchedStocks(CashierSearchStockModel searchStockParameters)
         {
             return stocksDAL.GetAllStocks(searchStockParameters);
         }
         
-        public Stock GetStock(CashierSearchStockModel searchStockParameters)
+        public Stock GetFirstSearchedStock(CashierSearchStockModel searchStockParameters)
         {
             ObservableCollection<Stock> Stocks = stocksDAL.GetAllStocks(searchStockParameters);
 

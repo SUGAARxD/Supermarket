@@ -137,7 +137,7 @@ namespace SupermarketApp.ViewModel
                 SearchedStock = null;
                 CashierSearchStock.ResetSuggestionsListboxesVisibility();
                 if (CashierSearchStock.IsOneFieldNotEmpty())
-                    SearchedStock = _stocksBLL.GetStock(CashierSearchStock);
+                    SearchedStock = _stocksBLL.GetFirstSearchedStock(CashierSearchStock);
             }
             catch (Exception e)
             {

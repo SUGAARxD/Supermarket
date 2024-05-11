@@ -4,15 +4,345 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupermarketApp.View"
+        xmlns:vm="clr-namespace:SupermarketApp.ViewModel"
+        xmlns:convert="clr-namespace:SupermarketApp.Converters"
         mc:Ignorable="d"
         Title="Users Manager"
-        Width="1280" Height="720"
+        Width="1100" Height="700"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         Closing="Window_Closing">
 
+    <Window.DataContext>
+        <vm:UsersManagerVM/>
+    </Window.DataContext>
+
     <Grid>
-        
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.7*"/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid
+        Grid.Column="0"
+        HorizontalAlignment="Center"
+        AutoGenerateColumns="False"
+        Width="350"
+        Height="600"
+        FontSize="20"
+        ItemsSource="{Binding Users}" 
+        IsReadOnly="True"
+        SelectionMode="Single"
+        SelectionUnit="FullRow"
+        CanUserSortColumns="True"
+        CanUserReorderColumns="False"
+        CanUserAddRows="False"
+        CanUserDeleteRows="False"
+        CanUserResizeColumns="False"
+        CanUserResizeRows="False"
+        ScrollViewer.VerticalScrollBarVisibility="Auto"
+        BorderBrush="{Binding MyTheme.BorderColor}"
+        SelectedItem="{Binding SelectedUser}">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                Header="Username" 
+                Width="*"
+                Binding="{Binding Username}"
+                    />
+                <DataGridTextColumn 
+                Header="User Type" 
+                Width="*"
+                Binding="{Binding UserType}"
+                    />
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+        <StackPanel
+        Grid.Column="1">
+
+            <StackPanel
+             Orientation="Horizontal"
+             HorizontalAlignment="Center"
+             Height="40"
+             Margin="0,40,0,40">
+
+                <Button
+                 Content="Get Active Users"
+                 Width="170"
+                 FontSize="20"
+                 Background="{Binding MyTheme.ButtonBackgroundColor}"
+                 BorderBrush="{Binding MyTheme.BorderColor}"
+                 Command="{Binding GetActiveUsersCommand}"
+                     />
+
+                <Button
+                 Content="Get Inactive Users"
+                 Width="170"
+                 FontSize="20"
+                 Margin="30,0,0,0"
+                 Background="{Binding MyTheme.ButtonBackgroundColor}"
+                 BorderBrush="{Binding MyTheme.BorderColor}"
+                 Command="{Binding GetInactiveUsersCommand}"
+                     />
+
+            </StackPanel>
+
+            <StackPanel
+            Orientation="Horizontal"
+            Width="310">
+
+                <StackPanel
+                 Width="150"
+                 Height="70"
+                 Margin="0,0,10,0">
+
+                    <Label 
+                 Content="Username"
+                 Height="40"
+                 FontSize="20"
+                 BorderThickness="0,0,0,1"
+                 BorderBrush="{Binding MyTheme.BorderColor}"
+                     />
+
+                    <TextBox
+                 Height="30"
+                 FontSize="20"
+                 BorderBrush="{Binding MyTheme.BorderColor}"
+                 Text="{Binding DummyUser.Username, UpdateSourceTrigger=PropertyChanged}"
+                     />
+
+                </StackPanel>
+
+                <StackPanel
+                 Width="150"
+                 Height="80"
+                 Margin="0,0,10,0">
+
+                    <Label 
+                     Content="User Type"
+                     Height="40"
+                     FontSize="20"
+                         />
+
+                    <ComboBox
+                        FontSize="20"
+                        Margin="0,3,0,0"
+                        ItemsSource="{Binding UserTypes}"
+                        SelectedItem="{Binding DummyUser.UserType}"
+                        />
+
+                </StackPanel>
+
+            </StackPanel>
+
+            <StackPanel
+                 Orientation="Horizontal"
+                 HorizontalAlignment="Center"
+                 Width="320">
+
+                <StackPanel
+                     Width="150"
+                     Height="70">
+
+                    <Label
+                         Height="40"
+                         FontSize="20"
+                            />
+
+                    <Button
+                         HorizontalAlignment="Left"
+                         Content="Show password"
+                         Height="30"
+                         Width="150"
+                         FontSize="20"
+                         Background="{Binding MyTheme.ButtonBackgroundColor}"
+                         BorderBrush="{Binding MyTheme.BorderColor}"
+                         Command="{Binding ShowPasswordCommand}"
+                             />
+
+                </StackPanel>
+
+                <StackPanel
+                     Width="150"
+                     Height="70"
+                     Margin="20,0,0,0">
+
+                    <Label
+                         Height="40"
+                         FontSize="20"
+                            />
+
+                    <Button
+                         HorizontalAlignment="Left"
+                         Content="Add password"
+                         Height="30"
+                         Width="150"
+                         FontSize="20"
+                         Background="{Binding MyTheme.ButtonBackgroundColor}"
+                         BorderBrush="{Binding MyTheme.BorderColor}"
+                         Command="{Binding AddPasswordCommand}"
+                            />
+
+                </StackPanel>
+
+            </StackPanel>
+
+            <StackPanel
+            Width="180">
+
+                <StackPanel
+                 Orientation="Horizontal"
+                 HorizontalAlignment="Center"
+                 Width="180">
+
+                    <StackPanel
+                     Width="80"
+                     Height="70">
+
+                        <Label
+                         Height="40"
+                         FontSize="20"
+                            />
+
+                        <Button
+                         HorizontalAlignment="Left"
+                         Content="Add"
+                         Height="30"
+                         Width="80"
+                         FontSize="20"
+                         Background="{Binding MyTheme.ButtonBackgroundColor}"
+                         BorderBrush="{Binding MyTheme.BorderColor}"
+                         Command="{Binding AddCommand}"
+                             />
+
+                    </StackPanel>
+
+                    <StackPanel
+                     Width="80"
+                     Height="70"
+                     Margin="20,0,0,0">
+
+                        <Label
+                         Height="40"
+                         FontSize="20"
+                            />
+
+                        <Button
+                         HorizontalAlignment="Left"
+                         Content="Delete"
+                         Height="30"
+                         Width="80"
+                         FontSize="20"
+                         Background="{Binding MyTheme.ButtonBackgroundColor}"
+                         BorderBrush="{Binding MyTheme.BorderColor}"
+                         Command="{Binding DeleteCommand}"
+                             />
+
+                    </StackPanel>
+
+                </StackPanel>
+
+                <StackPanel
+                 Orientation="Horizontal"
+                 HorizontalAlignment="Center"
+                 Margin="0,20,0,0"
+                 Width="180">
+
+                    <StackPanel
+                     Width="80"
+                     Height="70">
+
+                        <Label
+                         Height="40"
+                         FontSize="20"
+                            />
+
+                        <Button
+                         HorizontalAlignment="Left"
+                         Content="Modify"
+                         Height="30"
+                         Width="80"
+                         FontSize="20"
+                         Background="{Binding MyTheme.ButtonBackgroundColor}"
+                         BorderBrush="{Binding MyTheme.BorderColor}"
+                         Command="{Binding ModifyCommand}"
+                             />
+
+                    </StackPanel>
+
+                    <StackPanel
+                     Width="80"
+                     Height="70"
+                     Margin="20,0,0,0">
+
+                        <Label
+                         Height="40"
+                         FontSize="20"
+                             />
+
+                        <Button
+                         Content="Clear"
+                         Height="30"
+                         Width="80"
+                         FontSize="20"
+                         Background="{Binding MyTheme.ButtonBackgroundColor}"
+                         BorderBrush="{Binding MyTheme.BorderColor}"
+                         Command="{Binding ClearCommand}"
+                             />
+
+                    </StackPanel>
+
+                </StackPanel>
+
+            </StackPanel>
+
+            <StackPanel
+                Orientation="Horizontal"
+                Margin="0,40,0,0"
+                Width="180">
+
+                <StackPanel.Resources>
+                    <convert:StringToDateConverter x:Key="StringToDateConverter" />
+
+                    <Style TargetType="DatePickerTextBox">
+                        <Setter Property="IsEnabled" Value="False" />
+                    </Style>
+                </StackPanel.Resources>
+
+                <DatePicker
+                    Width="150"
+                    FontSize="20"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    SelectedDate="{Binding ReportDate, Converter={StaticResource StringToDateConverter}, Mode=TwoWay}" />
+
+                <Button
+                    Content="X"
+                    Width="30"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding ClearDateCommand}"
+                        />
+
+                <Button/>
+
+            </StackPanel>
+
+            <Button
+                Content="Show Receipt Report"
+                Height="40"
+                Width="190"
+                FontSize="20"
+                Margin="0,20,0,0"
+                Background="{Binding MyTheme.ButtonBackgroundColor}"
+                BorderBrush="{Binding MyTheme.BorderColor}"
+                Command="{Binding ShowReportCommand}"
+                    />
+
+        </StackPanel>
+
     </Grid>
-    
+
 </Window>

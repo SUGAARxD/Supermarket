@@ -250,6 +250,7 @@ namespace SupermarketApp.ViewModel
             SelectedProducer = null;
             DummyProducer.Name = "";
             DummyProducer.Country = "";
+            DummyProducer.Id = -1;
         }
 
         #endregion

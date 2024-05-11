@@ -253,6 +253,7 @@ namespace SupermarketApp.ViewModel
         {
             SelectedCategory = null;
             DummyCategory.Name = "";
+            DummyCategory.Id = -1;
             CategoryValue = 0;
         }
 
