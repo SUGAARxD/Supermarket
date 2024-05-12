@@ -21,6 +21,5 @@ namespace SupermarketApp.View
         {
             Application.Current.Windows.OfType<AdministrationWindow>().FirstOrDefault().Show();
         }
-
     }
 }

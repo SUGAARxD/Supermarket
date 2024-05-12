@@ -46,6 +46,7 @@
             </StackPanel>
 
             <DataGrid
+                Grid.Column="0"
                 AutoGenerateColumns="False"
                 Height="580"
                 FontSize="20"
@@ -151,10 +152,6 @@
             <StackPanel
                 Height="350">
 
-                <StackPanel.Resources>
-                    <convert:StockModelToCollectionConverter x:Key="StockModelToCollectionConverter" />
-                </StackPanel.Resources>
-
                 <StackPanel
                     Width="500"
                     Height="160">
@@ -244,8 +241,6 @@
                                     BorderBrush="{Binding MyTheme.BorderColor}"
                                     Command="{Binding ClearDateCommand}"
                                         />
-
-                                <Button/>
 
                             </StackPanel>
 

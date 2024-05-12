@@ -18,69 +18,88 @@
 
     <Grid>
 
+        <Label
+            HorizontalAlignment="Center"
+            Margin="0,100,0,0"
+            FontSize="40"
+            Content="{Binding UserLabel}"/>
+
         <StackPanel
-            Width="300"
-            Height="300">
+            Width="640"
+            Height="120">
 
-            <Button
-                Content="Manage Products"
-                Width="200"
-                Height="30"
-                FontSize="20"
-                Background="{Binding MyTheme.ButtonBackgroundColor}"
-                BorderBrush="{Binding MyTheme.BorderColor}"
-                Command="{Binding OpenProductsManagerWindowCommand}"
-                    />
+            <StackPanel
+                Orientation="Horizontal"
+                Margin="0,0,0,20">
 
-            <Button
-                Content="Manage Producers"
-                Width="200"
-                Height="30"
-                FontSize="20"
-                Background="{Binding MyTheme.ButtonBackgroundColor}"
-                BorderBrush="{Binding MyTheme.BorderColor}"
-                Command="{Binding OpenProducersManagerWindowCommand}"
-                    />
+                <Button
+                    Content="Manage Products"
+                    Width="200"
+                    Height="50"
+                    FontSize="20"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding OpenProductsManagerWindowCommand}"
+                        />
 
-            <Button
-                Content="Manage Categories"
-                Width="200"
-                Height="30"
-                FontSize="20"
-                Background="{Binding MyTheme.ButtonBackgroundColor}"
-                BorderBrush="{Binding MyTheme.BorderColor}"
-                Command="{Binding OpenCategoriesManagerWindowCommand}"
-                    />
+                <Button
+                    Content="Manage Producers"
+                    Width="200"
+                    Height="50"
+                    Margin="20,0,20,0"
+                    FontSize="20"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding OpenProducersManagerWindowCommand}"
+                        />
 
-            <Button
-                Content="Manage Stocks"
-                Width="200"
-                Height="30"
-                FontSize="20"
-                Background="{Binding MyTheme.ButtonBackgroundColor}"
-                BorderBrush="{Binding MyTheme.BorderColor}"
-                Command="{Binding OpenStocksManagerWindowCommand}"
-                    />
+                <Button
+                    Content="Manage Categories"
+                    Width="200"
+                    Height="50"
+                    FontSize="20"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding OpenCategoriesManagerWindowCommand}"
+                        />
 
-            <Button
-                Content="Manage Receipts"
-                Width="200"
-                Height="30"
-                FontSize="20"
-                Background="{Binding MyTheme.ButtonBackgroundColor}"
-                BorderBrush="{Binding MyTheme.BorderColor}"
-                Command="{Binding OpenReceiptsManagerWindowCommand}"
-                    />
+            </StackPanel>
 
-            <Button
-                Content="Manage Users"
-                Width="200"
-                Height="30"
-                FontSize="20"
-                Background="{Binding MyTheme.ButtonBackgroundColor}"
-                BorderBrush="{Binding MyTheme.BorderColor}"
-                Command="{Binding OpenUsersManagerWindowCommand}"
-                    />
+            <StackPanel
+                Orientation="Horizontal">
+
+                <Button
+                    Content="Manage Stocks"
+                    Width="200"
+                    Height="50"
+                    FontSize="20"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding OpenStocksManagerWindowCommand}"
+                        />
+
+                <Button
+                    Content="Manage Receipts"
+                    Width="200"
+                    Height="50"
+                    Margin="20,0,20,0"
+                    FontSize="20"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding OpenReceiptsManagerWindowCommand}"
+                        />
+
+                <Button
+                    Content="Manage Users"
+                    Width="200"
+                    Height="50"
+                    FontSize="20"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding OpenUsersManagerWindowCommand}"
+                        />
+
+            </StackPanel>
 
         </StackPanel>
 

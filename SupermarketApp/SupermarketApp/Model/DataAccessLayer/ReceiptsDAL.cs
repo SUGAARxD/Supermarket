@@ -4,6 +4,7 @@ using System.Data;
 using System;
 using SupermarketApp.ViewModel;
 using SupermarketApp.Model.BusinessLogicLayer;
+using System.Collections.ObjectModel;
 
 namespace SupermarketApp.Model.DataAccessLayer
 {
@@ -111,6 +112,117 @@ namespace SupermarketApp.Model.DataAccessLayer
 
                 connection.Open();
                 command.ExecuteNonQuery();
+            }
+        }
+
+        public void GetReceiptProducts(Receipt receipt, ObservableCollection<StockReceipt> ProductsList)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("GetReceiptProducts", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter receiptIdParameter = new SqlParameter("@receiptId", receipt.Id);
+                command.Parameters.Add(receiptIdParameter);
+
+                connection.Open();
+
+                StocksBLL stocksBLL = new StocksBLL();
+
+                ProductsList.Clear();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    StockReceipt stockReceipt = new StockReceipt();
+                    stockReceipt.Stock = stocksBLL.GetStock((int)(reader[0]));
+                    stockReceipt.Receipt = receipt;
+                    stockReceipt.Quantity = (int)(reader[2]);
+                    stockReceipt.Subtotal = (float)(reader[3]);
+
+                    ProductsList.Add(stockReceipt);
+                }
+                reader.Close();
+            }
+        }
+
+        public void GetAllActiveReceipts(ObservableCollection<Receipt> Receipts)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("GetAllActiveReceipts", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                connection.Open();
+
+                UsersBLL usersBLL = new UsersBLL();
+
+                Receipts.Clear();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Receipt receipt = new Receipt();
+                    receipt.Id = (int)(reader[0]);
+                    receipt.IssuanceDate = DateTime.Parse(reader[1].ToString()).Date.ToShortDateString();
+                    receipt.Total = (float)(reader[2]);
+
+                    receipt.Cashier = usersBLL.GetUser((int)(reader[3]));
+
+                    Receipts.Add(receipt);
+                }
+                reader.Close();
+            }
+        }
+
+        public void GetAllInactiveReceipts(ObservableCollection<Receipt> Receipts)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("GetAllInactiveReceipts", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                connection.Open();
+
+                UsersBLL usersBLL = new UsersBLL();
+
+                Receipts.Clear();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Receipt receipt = new Receipt();
+                    receipt.Id = (int)(reader[0]);
+                    receipt.IssuanceDate = DateTime.Parse(reader[1].ToString()).Date.ToShortDateString();
+                    receipt.Total = (float)(reader[2]);
+
+                    receipt.Cashier = usersBLL.GetUser((int)(reader[3]));
+
+                    Receipts.Add(receipt);
+                }
+                reader.Close();
+            }
+        }
+
+        public void GetBiggestReceipt(string date, ObservableCollection<StockReceipt> ProductsList)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("GetBiggestReceipts", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter dateParameter = new SqlParameter("@issuanceDate", date);
+                command.Parameters.Add(dateParameter);
+
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    GetReceiptProducts(new Receipt { Id = (int)(reader[0]) }, ProductsList);
+                    break;
+                }
+                reader.Close();
             }
         }
 

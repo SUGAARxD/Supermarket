@@ -4,13 +4,232 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupermarketApp.View"
+        xmlns:vm="clr-namespace:SupermarketApp.ViewModel"
+        xmlns:convert="clr-namespace:SupermarketApp.Converters"
         mc:Ignorable="d"
-        Title="Receipts Manager" 
-        Height="450" Width="800"
+        Title="Receipts Manager"  
+        Width="1280" Height="720"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        Background="{Binding MyTheme.WindowBackgroundColor}"
         Closing="Window_Closing">
-    
+
+    <Window.DataContext>
+        <vm:ReceiptsManagerVM/>
+    </Window.DataContext>
+
     <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.5*"/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            AutoGenerateColumns="False"
+            Width="450"
+            Height="650"
+            FontSize="20"
+            ItemsSource="{Binding Receipts}" 
+            IsReadOnly="True"
+            SelectionMode="Single"
+            SelectionUnit="FullRow"
+            CanUserSortColumns="True"
+            CanUserReorderColumns="False"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            CanUserResizeColumns="False"
+            CanUserResizeRows="False"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            BorderBrush="{Binding MyTheme.BorderColor}"
+            SelectedItem="{Binding SelectedReceipt}"
+            >
+
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                    Header="Number" 
+                    Width="0.8*"
+                    Binding="{Binding Id}"
+                        />
+                <DataGridTextColumn 
+                    Header="Issuance Date" 
+                    Width="*"
+                    Binding="{Binding IssuanceDate}"
+                        />
+                <DataGridTextColumn 
+                    Header="Total" 
+                    Width="0.7*"
+                    Binding="{Binding Total}"
+                        />
+                <DataGridTextColumn 
+                    Header="Cashier" 
+                    Width="0.8*"
+                    Binding="{Binding Cashier.Username}"
+                        />
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel
+            Grid.Column="1">
+
+            <StackPanel
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                Height="40"
+                Margin="0,40,0,20">
+
+                <Button
+                    Content="Get Active Products"
+                    Width="200"
+                    FontSize="20"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding GetActiveReceiptsCommand}"
+                        />
+
+                <Button
+                    Content="Get Inactive Products"
+                    Width="200"
+                    FontSize="20"
+                    Margin="30,0,0,0"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding GetInactiveReceiptsCommand}"
+                        />
+
+            </StackPanel>
+
+            <StackPanel
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                Height="40">
+
+                <Button
+                    Content="Delete Receipt"
+                    Width="150"
+                    Height="40"
+                    FontSize="20"
+                    Margin="0,0,20,0"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding DeleteCommand}"
+                    />
+
+                <Button
+                    Content="Clear"
+                    Height="40"
+                    Width="100"
+                    FontSize="20"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding ClearCommand}"
+                        />
+
+            </StackPanel>
+
+            <StackPanel
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                Height="35"
+                Margin="0,20,0,20">
+
+                <Button
+                    Content="Show Biggest Receipt"
+                    Width="200"
+                    Height="35"
+                    FontSize="20"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding ShowBiggestReceiptCommand}"
+                    />
+
+                <StackPanel
+                    Orientation="Horizontal"
+                    Margin="20,0,0,0">
+
+                    <StackPanel.Resources>
+                        <convert:StringToDateConverter x:Key="StringToDateConverter" />
+
+                        <Style TargetType="DatePickerTextBox">
+                            <Setter Property="IsEnabled" Value="False" />
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <DatePicker
+                        Width="150"
+                        FontSize="20"
+                        BorderBrush="{Binding MyTheme.BorderColor}"
+                        SelectedDate="{Binding BiggestReceiptDate, Converter={StaticResource StringToDateConverter}, Mode=TwoWay}" />
+
+                    <Button
+                        Content="X"
+                        Width="30"
+                        Background="{Binding MyTheme.ButtonBackgroundColor}"
+                        BorderBrush="{Binding MyTheme.BorderColor}"
+                        Command="{Binding ClearDateCommand}"
+                            />
+
+                </StackPanel>
+
+            </StackPanel>
+
+            <DataGrid
+                AutoGenerateColumns="False"
+                Height="450"
+                Width="740"
+                FontSize="20"
+                ItemsSource="{Binding ProductsList}" 
+                IsReadOnly="True"
+                SelectionMode="Single"
+                SelectionUnit="FullRow"
+                CanUserReorderColumns="False"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                CanUserSortColumns="False"
+                CanUserResizeColumns="False"
+                CanUserResizeRows="False"
+                BorderBrush="{Binding MyTheme.BorderColor}">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn 
+                        Header="Product" 
+                        Width="*"
+                        Binding="{Binding Stock.Product.Name}"
+                            />
+                    <DataGridTextColumn 
+                        Header="Barcode" 
+                        Width="*"
+                        Binding="{Binding Stock.Product.Barcode}"
+                            />
+                    <DataGridTextColumn 
+                        Header="Category" 
+                        Width="*"
+                        Binding="{Binding Stock.Product.Category.Name}"
+                            />
+                    <DataGridTextColumn 
+                        Header="Price" 
+                        Width="*"
+                        Binding="{Binding Stock.SalePrice}"
+                            />
+                    <DataGridTextColumn 
+                        Header="Quantity" 
+                        Width="*"
+                        Binding="{Binding Quantity}"
+                            />
+                    <DataGridTextColumn 
+                        Header="Subtotal" 
+                        Width="*"
+                        Binding="{Binding Subtotal}"
+                            />
+
+                </DataGrid.Columns>
+            </DataGrid>
         
+        </StackPanel>
+    
     </Grid>
     
 </Window>

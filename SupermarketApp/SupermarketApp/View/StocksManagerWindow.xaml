@@ -4,13 +4,463 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupermarketApp.View"
+        xmlns:vm="clr-namespace:SupermarketApp.ViewModel"
+        xmlns:convert="clr-namespace:SupermarketApp.Converters"
         mc:Ignorable="d"
         Title="Stocks Manager" 
-        Height="450" Width="800"
+        Width="1600" Height="720"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        Background="{Binding MyTheme.WindowBackgroundColor}"
         Closing="Window_Closing">
-    
+
+    <Window.DataContext>
+        <vm:StocksManagerVM/>
+    </Window.DataContext>
+
     <Grid>
-        
-    </Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.4*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            AutoGenerateColumns="False"
+            Width="900"
+            Height="650"
+            FontSize="20"
+            ItemsSource="{Binding Stocks}" 
+            IsReadOnly="True"
+            SelectionMode="Single"
+            SelectionUnit="FullRow"
+            CanUserSortColumns="True"
+            CanUserReorderColumns="False"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            CanUserResizeColumns="False"
+            CanUserResizeRows="False"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            BorderBrush="{Binding MyTheme.BorderColor}"
+            SelectedItem="{Binding SelectedStock}"
+            >
+
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                    Header="Product" 
+                    Width="0.9*"
+                    Binding="{Binding Product.Name}"
+                        />
+                <DataGridTextColumn 
+                    Header="Quantity" 
+                    Width="0.9*"
+                    Binding="{Binding Quantity}"
+                        />
+                <DataGridTextColumn 
+                    Header="Unit" 
+                    Width="0.5*"
+                    Binding="{Binding Unit}"
+                        />
+                <DataGridTextColumn 
+                    Header="Supply Date" 
+                    Width="*"
+                    Binding="{Binding SupplyDate}"
+                        />
+                <DataGridTextColumn 
+                    Header="Expiration Date" 
+                    Width="1.2*"
+                    Binding="{Binding ExpirationDate}"
+                        />
+                <DataGridTextColumn 
+                    Header="Purchase Price" 
+                    Width="1.2*"
+                    Binding="{Binding PurchasePrice}"
+                        />
+                <DataGridTextColumn 
+                    Header="Sale Price" 
+                    Width="0.9*"
+                    Binding="{Binding SalePrice}"
+                        />
+                <DataGridTextColumn 
+                    Header="VAT" 
+                    Width="0.4*"
+                    Binding="{Binding VAT}"
+                        />
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel
+            Grid.Column="1">
+
+            <StackPanel
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                Height="40"
+                Margin="0,40,0,80">
+
+                <Button
+                    Content="Get Active Products"
+                    Width="200"
+                    FontSize="20"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding GetActiveProductsCommand}"
+                        />
+
+                <Button
+                    Content="Get Inactive Products"
+                    Width="200"
+                    FontSize="20"
+                    Margin="30,0,0,0"
+                    Background="{Binding MyTheme.ButtonBackgroundColor}"
+                    BorderBrush="{Binding MyTheme.BorderColor}"
+                    Command="{Binding GetInactiveProductsCommand}"
+                        />
+
+            </StackPanel>
+
+            <StackPanel
+                Width="600">
+
+                <StackPanel
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Width="470">
+
+                    <StackPanel
+                        Width="200"
+                        Height="70"
+                        Margin="0,0,10,0">
+                        
+                        <Label 
+                            Content="Product"
+                            Height="40"
+                            FontSize="20"
+                            BorderThickness="0,0,0,1"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                                />
+
+                        <ComboBox
+                            Height="30"
+                            MaxDropDownHeight="300"
+                            FontSize="20"
+                            ItemsSource="{Binding Products}"
+                            DisplayMemberPath="DisplayValue"
+                            Text="{Binding DummyStock.Product.DisplayValue, Mode=OneWay}"
+                            SelectedItem="{Binding DummyStock.Product}"
+                                >
+                            <ComboBox.Resources>
+                                <Style TargetType="ComboBox">
+                                    <Setter Property="ItemContainerStyle">
+                                        <Setter.Value>
+                                            <Style TargetType="ComboBoxItem">
+                                                <Setter Property="MaxWidth" Value="200"/>
+                                            </Style>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ComboBox.Resources>
+                        </ComboBox>
+
+                    </StackPanel>
+
+                    <StackPanel
+                        Width="150"
+                        Height="70"
+                        Margin="0,0,10,0">
+
+                        <Label 
+                            Content="Quantity"
+                            Height="40"
+                            FontSize="20"
+                            BorderThickness="0,0,0,1"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                                />
+
+                        <TextBox
+                            Height="30"
+                            FontSize="20"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                            Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"
+                                />
+
+                    </StackPanel>
+
+                    <StackPanel
+                        Width="100"
+                        Height="70">
+
+                        <Label 
+                            Content="Unit"
+                            Height="40"
+                            FontSize="20"
+                            BorderThickness="0,0,0,1"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                                />
+
+                        <TextBox
+                            Height="30"
+                            FontSize="20"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                            Text="{Binding DummyStock.Unit, UpdateSourceTrigger=PropertyChanged}"
+                                />
+
+                    </StackPanel>
+
+                </StackPanel>
+
+                <StackPanel
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0,20,0,0"
+                    Width="310">
+
+                    <StackPanel
+                        Width="150"
+                        Height="70">
+
+                        <Label 
+                            Content="Purchase price"
+                            Height="40"
+                            FontSize="20"
+                            BorderThickness="0,0,0,1"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                                />
+
+                        <TextBox
+                            Height="30"
+                            FontSize="20"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                            Text="{Binding PurchasePrice, UpdateSourceTrigger=PropertyChanged}"
+                                />
+
+                    </StackPanel>
+
+                    <StackPanel
+                        Width="150"
+                        Height="70"
+                        Margin="10,0,0,0">
+
+                        <Label 
+                            Content="VAT"
+                            Height="40"
+                            FontSize="20"
+                            BorderThickness="0,0,0,1"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                                />
+
+                        <TextBox
+                            Height="30"
+                            FontSize="20"
+                            BorderBrush="{Binding MyTheme.BorderColor}"
+                            Text="{Binding VAT, UpdateSourceTrigger=PropertyChanged}"
+                                />
+
+                    </StackPanel>
+                    
+                </StackPanel>
+                
+                <StackPanel
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0,20,0,0"
+                    Width="380">
+
+                    <StackPanel.Resources>
+                        <convert:StringToDateConverter x:Key="StringToDateConverter" />
+
+                        <Style TargetType="DatePickerTextBox">
+                            <Setter Property="IsEnabled" Value="False" />
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <StackPanel
+                        Width="180"
+                        Height="70">
+
+                        <Label 
+                                Content="Supply Date"
+                                Height="35"
+                                FontSize="15"
+                                BorderThickness="0,0,0,1"
+                                BorderBrush="{Binding MyTheme.BorderColor}"
+                                    />
+
+                        <StackPanel
+                            Orientation="Horizontal">
+
+                            <DatePicker
+                                Width="150"
+                                FontSize="20"
+                                BorderBrush="{Binding MyTheme.BorderColor}"
+                                SelectedDate="{Binding DummyStock.SupplyDate, Converter={StaticResource StringToDateConverter}, Mode=TwoWay}" />
+
+                            <Button
+                                Content="X"
+                                Width="30"
+                                Background="{Binding MyTheme.ButtonBackgroundColor}"
+                                BorderBrush="{Binding MyTheme.BorderColor}"
+                                Command="{Binding ClearSupplyDateCommand}"
+                                    />
+
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <StackPanel
+                        Width="180"
+                        Height="70"
+                        Margin="20,0,0,0">
+
+                        <Label 
+                                Content="Expiration Date"
+                                Height="35"
+                                FontSize="15"
+                                BorderThickness="0,0,0,1"
+                                BorderBrush="{Binding MyTheme.BorderColor}"
+                                    />
+
+                        <StackPanel
+                            Orientation="Horizontal">
+
+                            <DatePicker
+                                Width="150"
+                                FontSize="20"
+                                BorderBrush="{Binding MyTheme.BorderColor}"
+                                SelectedDate="{Binding DummyStock.ExpirationDate, Converter={StaticResource StringToDateConverter}, Mode=TwoWay}" />
+
+                            <Button
+                                Content="X"
+                                Width="30"
+                                Background="{Binding MyTheme.ButtonBackgroundColor}"
+                                BorderBrush="{Binding MyTheme.BorderColor}"
+                                Command="{Binding ClearExpirationDateCommand}"
+                                    />
+
+                        </StackPanel>
+
+                    </StackPanel>
+
+                </StackPanel>
+
+            </StackPanel>
+
+            <StackPanel
+                Width="230">
+
+                <StackPanel
+                     Orientation="Horizontal"
+                     HorizontalAlignment="Center"
+                     Width="180">
+
+                    <StackPanel
+                         Width="80"
+                         Height="70">
+
+                        <Label
+                             Height="40"
+                             FontSize="20"
+                                />
+
+                        <Button
+                             HorizontalAlignment="Left"
+                             Content="Add"
+                             Height="30"
+                             Width="80"
+                             FontSize="20"
+                             Background="{Binding MyTheme.ButtonBackgroundColor}"
+                             BorderBrush="{Binding MyTheme.BorderColor}"
+                             Command="{Binding AddCommand}"
+                                 />
+
+                    </StackPanel>
+
+                    <StackPanel
+                         Width="80"
+                         Height="70"
+                         Margin="20,0,0,0">
+
+                        <Label
+                             Height="40"
+                             FontSize="20"
+                                />
+
+                        <Button
+                             HorizontalAlignment="Left"
+                             Content="Delete"
+                             Height="30"
+                             Width="80"
+                             FontSize="20"
+                             Background="{Binding MyTheme.ButtonBackgroundColor}"
+                             BorderBrush="{Binding MyTheme.BorderColor}"
+                             Command="{Binding DeleteCommand}"
+                                 />
+
+                    </StackPanel>
+
+                </StackPanel>
+
+                <StackPanel
+                     Orientation="Horizontal"
+                     HorizontalAlignment="Center"
+                     Margin="0,20,0,0"
+                     Width="230">
+
+                    <StackPanel
+                         Width="130"
+                         Height="70">
+
+                        <Label
+                             Height="40"
+                             FontSize="20"
+                                />
+
+                        <Button
+                             HorizontalAlignment="Left"
+                             Content="Modify VAT"
+                             Height="30"
+                             Width="130"
+                             FontSize="20"
+                             Background="{Binding MyTheme.ButtonBackgroundColor}"
+                             BorderBrush="{Binding MyTheme.BorderColor}"
+                             Command="{Binding ModifyVATCommand}"
+                                 />
+
+                    </StackPanel>
+
+                    <StackPanel
+                         Width="80"
+                         Height="70"
+                         Margin="20,0,0,0">
+
+                        <Label
+                             Height="40"
+                             FontSize="20"
+                                 />
+
+                        <Button
+                             Content="Clear"
+                             Height="30"
+                             Width="80"
+                             FontSize="20"
+                             Background="{Binding MyTheme.ButtonBackgroundColor}"
+                             BorderBrush="{Binding MyTheme.BorderColor}"
+                             Command="{Binding ClearCommand}"
+                                 />
+
+                    </StackPanel>
+
+                </StackPanel>
+
+            </StackPanel>
     
+                
+                
+        </StackPanel>
+
+    </Grid>
+
 </Window>

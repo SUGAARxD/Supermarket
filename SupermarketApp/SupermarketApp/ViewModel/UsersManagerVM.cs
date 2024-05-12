@@ -17,35 +17,7 @@ namespace SupermarketApp.ViewModel
         public UsersManagerVM(Theme myTheme)
         {
             MyTheme = myTheme;
-            UserTypes = new ObservableCollection<string>
-            {
-                "Administrator",
-                "Cashier"
-            };
-            Months = new ObservableCollection<string>
-            {
-                "",
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9",
-                "10",
-                "11",
-                "12"
-            };
-            Years = new ObservableCollection<string>
-            {
-                ""
-            };
-            for (int year = DateTime.Now.Date.Year; year >= DateTime.Now.Date.Year - 100; --year)
-            {
-                Years.Add(year.ToString());
-            }
+            Init();
         }
 
         #region Properties and members
@@ -53,10 +25,9 @@ namespace SupermarketApp.ViewModel
         readonly UsersBLL _userBLL = new UsersBLL();
 
         public ObservableCollection<User> Users { get; set; } = new ObservableCollection<User>();
-        public ObservableCollection<string> UserTypes { get; set; }
-        public ObservableCollection<string> Months { get; set; }
-
-        public ObservableCollection<string> Years { get; set; }
+        public ObservableCollection<string> UserTypes { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<string> Months { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<string> Years { get; set; } = new ObservableCollection<string>();
 
         private string ActiveOrInactive = " ";
 
@@ -346,6 +317,22 @@ namespace SupermarketApp.ViewModel
             DummyUser.Id = -1;
             ReportMonth = "";
             ReportYear = "";
+        }
+
+        private void Init()
+        {
+            UserTypes.Add("Administrator");
+            UserTypes.Add("Cashier");
+            Months.Add("");
+            for (int month = 1; month <= 12; ++month)
+            {
+                Months.Add(month.ToString());
+            }
+            Years.Add("");
+            for (int year = DateTime.Now.Date.Year; year >= DateTime.Now.Date.Year - 100; --year)
+            {
+                Years.Add(year.ToString());
+            }
         }
 
         #endregion

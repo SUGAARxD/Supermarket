@@ -64,5 +64,14 @@ namespace SupermarketApp.Model.EntityLayer
 
         #endregion
 
+        #region Methods
+
+        public string DisplayValue
+        {
+            get { return $"{Name}\n{Barcode}"; }
+        }
+
+        #endregion
+
     }
 }

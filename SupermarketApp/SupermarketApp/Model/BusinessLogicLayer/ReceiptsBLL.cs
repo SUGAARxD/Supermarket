@@ -30,9 +30,7 @@ namespace SupermarketApp.Model.BusinessLogicLayer
 
         public void DropReceipt(Receipt receipt)
         {
-
             receiptsDAL.DropReceipt(receipt);
-
         }
 
         public void AddReceiptProduct(StockReceipt stockReceipt)
@@ -45,6 +43,31 @@ namespace SupermarketApp.Model.BusinessLogicLayer
             receiptsDAL.UpdateReceiptTotal(receipt);
         }
 
+        public void GetReceiptProducts(Receipt receipt, ObservableCollection<StockReceipt> ProductsList)
+        {
+            receiptsDAL.GetReceiptProducts(receipt, ProductsList);
+        }
+
+        public void GetAllActiveReceipts(ObservableCollection<Receipt> Receipts)
+        {
+            receiptsDAL.GetAllActiveReceipts(Receipts);
+            if (Receipts.Count == 0)
+                throw new System.Exception("No active receipts found!");
+        }
+
+        public void GetAllInactiveReceipts(ObservableCollection<Receipt> Receipts)
+        {
+            receiptsDAL.GetAllInactiveReceipts(Receipts);
+            if (Receipts.Count == 0)
+                throw new System.Exception("No inactive receipts found!");
+        }
+
+        public void GetBiggestReceipt(string date, ObservableCollection<StockReceipt> ProductsList)
+        {
+            if (string.IsNullOrEmpty(date))
+                throw new System.Exception("Please select a date!");
+            receiptsDAL.GetBiggestReceipt(date, ProductsList);
+        }
         #endregion
 
     }

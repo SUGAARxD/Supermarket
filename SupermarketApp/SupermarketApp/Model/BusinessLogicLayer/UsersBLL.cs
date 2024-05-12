@@ -119,6 +119,11 @@ namespace SupermarketApp.Model.BusinessLogicLayer
             return usersDAL.GetCashedAmounts(user, ReportMonth, ReportYear);
         }
 
+        public User GetUser(int id)
+        {
+            return usersDAL.GetUser(id);
+        }
+
         #endregion
 
     }

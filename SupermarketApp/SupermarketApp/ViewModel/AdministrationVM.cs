@@ -19,6 +19,7 @@ namespace SupermarketApp.ViewModel
         {
             MyTheme = myTheme;
             _user = user;
+            UserLabel = "Wellcome " + user.Username + "!";
         }
 
         #region Properties and members
@@ -44,6 +45,7 @@ namespace SupermarketApp.ViewModel
                 NotifyPropertyChanged(nameof(User));
             }
         }
+        public string UserLabel { get; set; }
 
         #endregion
 

@@ -220,6 +220,33 @@ namespace SupermarketApp.Model.DataAccessLayer
             }
         }
 
+        public User GetUser(int id)
+        {
+            using (SqlConnection connection = DALHelper.Connection)
+            {
+                SqlCommand command = new SqlCommand("GetUser", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter idParameter = new SqlParameter("@userId", id);
+                command.Parameters.Add(idParameter);
+
+                connection.Open();
+
+                User user = null;
+                
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    user = new User();
+                    user.Id = (int)(reader[0]);
+                    user.Username = reader[1].ToString();
+                    user.Password = reader[2].ToString();
+                    user.UserType = reader[3].ToString();
+                }
+                return user;
+            }
+        }
+
         #endregion
 
     }

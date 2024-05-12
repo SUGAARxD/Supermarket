@@ -110,107 +110,107 @@
             </StackPanel>
 
             <StackPanel
-            Width="180">
-
-                <StackPanel
-                Orientation="Horizontal"
-                HorizontalAlignment="Center"
                 Width="180">
 
+                <StackPanel
+                     Orientation="Horizontal"
+                     HorizontalAlignment="Center"
+                     Width="180">
+
                     <StackPanel
-                    Width="80"
-                    Height="70">
+                         Width="80"
+                         Height="70">
 
                         <Label
-                        Height="40"
-                        FontSize="20"
-                           />
+                             Height="40"
+                             FontSize="20"
+                                />
 
                         <Button
-                        HorizontalAlignment="Left"
-                        Content="Add"
-                        Height="30"
-                        Width="80"
-                        FontSize="20"
-                        Background="{Binding MyTheme.ButtonBackgroundColor}"
-                        BorderBrush="{Binding MyTheme.BorderColor}"
-                        Command="{Binding AddCommand}"
-                            />
+                             HorizontalAlignment="Left"
+                             Content="Add"
+                             Height="30"
+                             Width="80"
+                             FontSize="20"
+                             Background="{Binding MyTheme.ButtonBackgroundColor}"
+                             BorderBrush="{Binding MyTheme.BorderColor}"
+                             Command="{Binding AddCommand}"
+                                 />
 
                     </StackPanel>
 
                     <StackPanel
-                    Width="80"
-                    Height="70"
-                    Margin="20,0,0,0">
+                         Width="80"
+                         Height="70"
+                         Margin="20,0,0,0">
 
                         <Label
-                        Height="40"
-                        FontSize="20"
-       />
+                             Height="40"
+                             FontSize="20"
+                                />
 
                         <Button
-                        HorizontalAlignment="Left"
-                        Content="Delete"
-                        Height="30"
-                        Width="80"
-                        FontSize="20"
-                        Background="{Binding MyTheme.ButtonBackgroundColor}"
-                        BorderBrush="{Binding MyTheme.BorderColor}"
-                        Command="{Binding DeleteCommand}"
-                            />
+                             HorizontalAlignment="Left"
+                             Content="Delete"
+                             Height="30"
+                             Width="80"
+                             FontSize="20"
+                             Background="{Binding MyTheme.ButtonBackgroundColor}"
+                             BorderBrush="{Binding MyTheme.BorderColor}"
+                             Command="{Binding DeleteCommand}"
+                                 />
 
                     </StackPanel>
 
                 </StackPanel>
 
                 <StackPanel
-                Orientation="Horizontal"
-                HorizontalAlignment="Center"
-                Margin="0,20,0,0"
-                Width="180">
+                     Orientation="Horizontal"
+                     HorizontalAlignment="Center"
+                     Margin="0,20,0,0"
+                     Width="180">
 
                     <StackPanel
-                    Width="80"
-                    Height="70">
+                         Width="80"
+                         Height="70">
 
                         <Label
-                        Height="40"
-                        FontSize="20"
-                           />
+                             Height="40"
+                             FontSize="20"
+                                />
 
                         <Button
-                        HorizontalAlignment="Left"
-                        Content="Modify"
-                        Height="30"
-                        Width="80"
-                        FontSize="20"
-                        Background="{Binding MyTheme.ButtonBackgroundColor}"
-                        BorderBrush="{Binding MyTheme.BorderColor}"
-                        Command="{Binding ModifyCommand}"
-                            />
+                             HorizontalAlignment="Left"
+                             Content="Modify"
+                             Height="30"
+                             Width="80"
+                             FontSize="20"
+                             Background="{Binding MyTheme.ButtonBackgroundColor}"
+                             BorderBrush="{Binding MyTheme.BorderColor}"
+                             Command="{Binding ModifyCommand}"
+                                 />
 
                     </StackPanel>
 
                     <StackPanel
-                    Width="80"
-                    Height="70"
-                    Margin="20,0,0,0">
+                         Width="80"
+                         Height="70"
+                         Margin="20,0,0,0">
 
                         <Label
-                        Height="40"
-                        FontSize="20"
-                        />
+                             Height="40"
+                             FontSize="20"
+                                 />
 
                         <Button
-                        Content="Clear"
-                        Height="30"
-                        Width="80"
-                        FontSize="20"
-                        Background="{Binding MyTheme.ButtonBackgroundColor}"
-                        BorderBrush="{Binding MyTheme.BorderColor}"
-                        Command="{Binding ClearCommand}"
-                        />
+                             Content="Clear"
+                             Height="30"
+                             Width="80"
+                             FontSize="20"
+                             Background="{Binding MyTheme.ButtonBackgroundColor}"
+                             BorderBrush="{Binding MyTheme.BorderColor}"
+                             Command="{Binding ClearCommand}"
+                                 />
 
                     </StackPanel>
 
