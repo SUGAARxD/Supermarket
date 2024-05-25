@@ -102,22 +102,22 @@
                 Margin="0,40,0,80">
 
                 <Button
-                    Content="Get Active Products"
+                    Content="Get Active Stocks"
                     Width="200"
                     FontSize="20"
                     Background="{Binding MyTheme.ButtonBackgroundColor}"
                     BorderBrush="{Binding MyTheme.BorderColor}"
-                    Command="{Binding GetActiveProductsCommand}"
+                    Command="{Binding GetActiveStocksCommand}"
                         />
 
                 <Button
-                    Content="Get Inactive Products"
+                    Content="Get Inactive Stocks"
                     Width="200"
                     FontSize="20"
                     Margin="30,0,0,0"
                     Background="{Binding MyTheme.ButtonBackgroundColor}"
                     BorderBrush="{Binding MyTheme.BorderColor}"
-                    Command="{Binding GetInactiveProductsCommand}"
+                    Command="{Binding GetInactiveStocksCommand}"
                         />
 
             </StackPanel>

@@ -378,10 +378,6 @@ namespace SupermarketApp.ViewModel
                             _stocksBLL.ActivateStock(item.Stock);
 
                         _stocksBLL.UpdateStockQuantity(item.Stock, item.Stock.Quantity + item.Quantity);
-                        if (SearchedStock != null && SearchedStock.Id == item.Stock.Id)
-                        {
-                            SearchedStock.Quantity = SearchedStock.Quantity + item.Quantity;
-                        }
                         Receipt.Total -= item.Subtotal;
                         ProductsList.Remove(item);
                         MessageBox.Show("Removed successfully!");

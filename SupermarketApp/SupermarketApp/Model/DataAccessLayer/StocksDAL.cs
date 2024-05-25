@@ -154,13 +154,17 @@ namespace SupermarketApp.Model.DataAccessLayer
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
+                    DateTime expirationDate = DateTime.Parse(reader[4].ToString()).Date;
+
+                    if (expirationDate > DateTime.Now.Date)
+                    {
                         Stock stock = new Stock();
 
                         stock.Id = (int)(reader[0]);
                         stock.Quantity = (int)(reader[1]);
                         stock.Unit = reader[2].ToString();
                         stock.SupplyDate = DateTime.Parse(reader[3].ToString()).Date.ToShortDateString();
-                        stock.ExpirationDate = DateTime.Parse(reader[4].ToString()).Date.ToShortDateString();
+                        stock.ExpirationDate = expirationDate.ToShortDateString();
                         stock.PurchasePrice = (float)(reader[5]);
                         stock.SalePrice = (float)(reader[6]);
                         stock.VAT = (float)(reader[7]);
@@ -168,6 +172,11 @@ namespace SupermarketApp.Model.DataAccessLayer
                         stock.Product = productsBLL.GetProduct((int)(reader[8]));
 
                         Stocks.Add(stock);
+                    }
+                    else
+                    {
+                        DeleteStock((int)(reader[0]));
+                    }
                 }
                 reader.Close();
             }

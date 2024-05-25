@@ -14,9 +14,10 @@ namespace SupermarketApp.ViewModel
         public UsersManagerVM()
         {
         }
-        public UsersManagerVM(Theme myTheme)
+        public UsersManagerVM(Theme myTheme, User user)
         {
             MyTheme = myTheme;
+            _connectedUser = user;
             Init();
         }
 
@@ -41,6 +42,8 @@ namespace SupermarketApp.ViewModel
                 NotifyPropertyChanged(nameof(MyTheme));
             }
         }
+
+        private User _connectedUser;
 
         private User _selectedUser;
         public User SelectedUser
@@ -242,7 +245,9 @@ namespace SupermarketApp.ViewModel
 
         private bool CanDelete(object parameter)
         {
-            return SelectedUser != null && ActiveOrInactive.Equals("Active");
+            return SelectedUser != null 
+                && ActiveOrInactive.Equals("Active")
+                && !SelectedUser.Username.Equals(_connectedUser.Username);
         }
 
         private ICommand _showCashedAmountsCommand;

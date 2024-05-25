@@ -177,7 +177,7 @@ namespace SupermarketApp.ViewModel
         }
         private void OpenUsersManagerWindow(object parameter)
         {
-            UsersManagerWindow usersManagerWindow = new UsersManagerWindow(_myTheme);
+            UsersManagerWindow usersManagerWindow = new UsersManagerWindow(_myTheme, _user);
 
             Application.Current.Windows.OfType<AdministrationWindow>().FirstOrDefault().Hide();
 

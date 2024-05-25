@@ -1,4 +1,5 @@
 ﻿using SupermarketApp.Model;
+using SupermarketApp.Model.EntityLayer;
 using SupermarketApp.ViewModel;
 using System.ComponentModel;
 using System.Linq;
@@ -11,10 +12,10 @@ namespace SupermarketApp.View
     /// </summary>
     public partial class UsersManagerWindow : Window
     {
-        public UsersManagerWindow(Theme theme)
+        public UsersManagerWindow(Theme theme, User user)
         {
             InitializeComponent();
-            this.DataContext = new UsersManagerVM(theme);
+            this.DataContext = new UsersManagerVM(theme, user);
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)

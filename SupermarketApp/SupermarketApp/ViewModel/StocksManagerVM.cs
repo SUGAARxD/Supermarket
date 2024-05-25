@@ -117,14 +117,14 @@ namespace SupermarketApp.ViewModel
 
         #region Commands
 
-        private ICommand _getActiveProductsCommand;
-        public ICommand GetActiveProductsCommand
+        private ICommand _getActiveStocksCommand;
+        public ICommand GetActiveStocksCommand
         {
             get
             {
-                if (_getActiveProductsCommand == null)
-                    _getActiveProductsCommand = new RelayCommand(GetActiveStocks);
-                return _getActiveProductsCommand;
+                if (_getActiveStocksCommand == null)
+                    _getActiveStocksCommand = new RelayCommand(GetActiveStocks);
+                return _getActiveStocksCommand;
             }
         }
         private void GetActiveStocks(object parameter)
@@ -141,14 +141,14 @@ namespace SupermarketApp.ViewModel
             }
         }
 
-        private ICommand _getInctiveProductsCommand;
-        public ICommand GetInactiveProductsCommand
+        private ICommand _getInctiveStocksCommand;
+        public ICommand GetInactiveStocksCommand
         {
             get
             {
-                if (_getInctiveProductsCommand == null)
-                    _getInctiveProductsCommand = new RelayCommand(GetInactiveStocks);
-                return _getInctiveProductsCommand;
+                if (_getInctiveStocksCommand == null)
+                    _getInctiveStocksCommand = new RelayCommand(GetInactiveStocks);
+                return _getInctiveStocksCommand;
             }
         }
         private void GetInactiveStocks(object parameter)
@@ -304,6 +304,9 @@ namespace SupermarketApp.ViewModel
         {
             SelectedStock = null;
             DummyStock.ResetStockProperties();
+            Quantity = string.Empty;
+            VAT = string.Empty;
+            PurchasePrice = string.Empty;
         }
 
         private void Init()
