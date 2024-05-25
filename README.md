@@ -9,6 +9,7 @@ This is a C# project utilizing WPF (.NET Framework) and MVVM (Model-View-ViewMod
 - WPF (Windows Presentation Foundation)
 - SQL Server
 - MVVM (Model-View-ViewModel)
+- ADO.NET
 
 ## Main Features
 - Manage products, producers, categories, stocks and users
