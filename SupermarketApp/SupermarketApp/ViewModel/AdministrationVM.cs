@@ -19,7 +19,7 @@ namespace SupermarketApp.ViewModel
         {
             MyTheme = myTheme;
             _user = user;
-            UserLabel = "Wellcome " + user.Username + "!";
+            UserLabel = "Welcome " + user.Username + "!";
         }
 
         #region Properties and members
