@@ -7,7 +7,7 @@ This is a C# project utilizing WPF (.NET Framework) and MVVM (Model-View-ViewMod
 ## Technologies Used
 - C#
 - WPF (Windows Presentation Foundation)
-- SQLServer
+- SQL Server
 - MVVM (Model-View-ViewModel)
 
 ## Main Features
